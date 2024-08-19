@@ -29,8 +29,12 @@ class Router {
     public function dispatch(string $method, string $path) {
         if (isset($this->routes[$method][$path])) {
             $action = $this->routes[$method][$path];
-           
-            return $action; //pass routing to the controller
+            [$controller, $method] = $action;
+            if (method_exists($controller, $method)) {
+                return call_user_func([$controller, $method]);
+            } else {
+                return 'Method not found';
+            }
         } else {
             return '404 Not Found';
         }
