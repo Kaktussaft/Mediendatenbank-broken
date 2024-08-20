@@ -8,7 +8,7 @@ class UserModel
     public string $vorname;
     public string $nachname;
     public bool $istAdmin;
-    public string $nutzername;
+    public string $username;
     public string $passwort;
 
     public function __construct(int $id, string $vorname, string $nachname, bool $istAdmin, string $nutzername, string $passwort)
