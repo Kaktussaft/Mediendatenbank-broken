@@ -9,16 +9,15 @@ class UserModel
     public string $nachname;
     public bool $istAdmin;
     public string $username;
-    public string $passwort;
 
-    public function __construct(int $id, string $vorname, string $nachname, bool $istAdmin, string $nutzername, string $passwort)
+
+    public function __construct(int $id, string $vorname, string $nachname, bool $istAdmin, string $username)
     {
         $this->id = $id;
         $this->vorname = $vorname;
         $this->nachname = $nachname;
         $this->istAdmin = $istAdmin;
-        $this->nutzername = $nutzername;
-        $this->passwort = $passwort;
+        $this->username = $username;
     }
 
     public const PFAD_LANDING_PAGE = "Mediendatenbank/WEB42/Webapp/view/LandingPage.html";

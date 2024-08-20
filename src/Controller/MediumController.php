@@ -2,6 +2,7 @@
 
 namespace Webapp\src\Controller;
 use Webapp\src\Model\MediumModel;
+use Exception;
 
 class MediumController{
 

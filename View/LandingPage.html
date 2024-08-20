@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Login</title>
+    <title>Landing Page</title>
 </head>
-
 <body>
-    <h1>Login</h1>
+    <h1>Landing page</h1>
     <div>
-        <form action="/User.html" method="POST">
+        <form action="WEB42\Webapp\src\Controller\UserController.php" method="POST">
             <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
+            <input  type="hidden" name="Routing" value="login">
             <button type="submit">Login</button>
         </form>
     </div>
 </body>
-
 </html>

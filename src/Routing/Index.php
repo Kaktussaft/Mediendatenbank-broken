@@ -16,18 +16,17 @@ $router = new Router();
 $userController = new UserController;
 $mediumController = new MediumController;
 
-$router->post("/LandingPage", [$userController, "moveToLoginPage"]);
-$router->post("/Login", [$userController, "login"]);
+$router->post("/LandingPage", [$userController, "login"]);
 $router->post("/User", [$userController, "logout"]);
 $router->post("/Admin", [$userController, "toggleAdminView"]);
 
 $router->delete("/USER", [$mediumController, "deleteMedium"]);
-$router->delete("/ADMIN", [$userController, "deleteUser"]); //not a requirement, implementation for testing purposes
+$router->delete("/ADMIN", [$userController, "deleteUser"]); 
 
 $router->put("/USER", [$mediumController, "updateMedium"]);
 $router->put("/USER", [$mediumController, "uploadMedium"]);
 $router->put("/ADMIN", [$mediumController, "updateKeywords"]);
-$router->put("/ADMIN", [$userController, "updateUser"]); //not a requirement, implementation for testing purposes
+$router->put("/ADMIN", [$userController, "updateUser"]); 
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['REQUEST_URI'];
