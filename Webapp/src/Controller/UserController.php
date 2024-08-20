@@ -5,15 +5,15 @@ use Webapp\src\Model\UserModel;
 
 class UserController{
 
-    public function landingPageView() {
+    public function moveToLoginPage() {
         try {
-        header('Location: /Login');
+            header('Location: ' . UserModel::PFAD_LOGIN);
         } catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
         }
     }
 
-    public function logInView() {
+    public function login() {
         try {
 
             $isLoginOrRegister = $_POST['isLoginOrRegister'] ?? '';
@@ -24,8 +24,8 @@ class UserController{
 
                 //Check credentials through Repository
 
-                header('Location: /User');
-            } else if($isLoginOrRegister == "register"){
+                header('Location: ' . UserModel::PFAD_USER_VIEW);
+            } elseif($isLoginOrRegister == "register"){
 
                 $vorname = $_POST['vorname'] ?? '';
                 $nachname = $_POST['nachname'] ?? '';
@@ -48,18 +48,21 @@ class UserController{
 
             $isLogoutOrSwitchAdminView = $_POST['isLogoutOrSwitchAdminView'] ?? '';
 
-            if(isLogoutOrSwitchAdminView == "logout"){
+            if($isLogoutOrSwitchAdminView == "logout"){
                 header('Location: /LandingPage');
-            else if(isLogoutOrSwitchAdminView == "switchAdminView"){
+            }
+            elseif ($isLogoutOrSwitchAdminView == "switchAdminView") {
                 header('Location: /Admin');
             }
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
         }
-        }
+            
     }
+    
 
-    public function adminView() {
+    public function toggleAdminView() {
         try {
             header('Location: /User');
         } catch (Exception $e) {

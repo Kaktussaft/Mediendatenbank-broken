@@ -14,10 +14,10 @@ $router = new Router();
 $userController = new UserController;
 $mediumController = new MediumController;
 
-$router->addRoute("POST",  "/LandingPage", [$userController, "landingPageView"]);
-$router->addRoute("POST", "/Login", [$userController, "loginView"]);
+$router->addRoute("POST",  "/LandingPage", [$userController, "moveToLoginPage"]);
+$router->addRoute("POST", "/Login", [$userController, "login"]);
 $router->addRoute("POST", "/User", [$userController, "logout"]);
-$router->addRoute("POST", "/Admin", [$userController, "adminView"]);
+$router->addRoute("POST", "/Admin", [$userController, "toggleAdminView"]);
 
 $router->addRoute("DELETE", "/USER", [$mediumController, "deleteMedium"]);
 $router->addRoute("DELETE", "/ADMIN", [$userController, "deleteUser"]); //not a requirement, implementation for testing purposes
