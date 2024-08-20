@@ -20,4 +20,10 @@ class UserModel
         $this->nutzername = $nutzername;
         $this->passwort = $passwort;
     }
+
+    public const PFAD_LANDING_PAGE = "Mediendatenbank/WEB42/Webapp/view/LandingPage.html";
+    public const PFAD_LOGIN = "Mediendatenbank/WEB42/Webapp/view/Login.html";
+    public const PFAD_USER_VIEW = "Mediendatenbank/WEB42/Webapp/view/User.html";
+    public const PFAD_ADMIN_VIEW = "Mediendatenbank/WEB42/Webapp/view/Admin.html"; 
+    
 }
