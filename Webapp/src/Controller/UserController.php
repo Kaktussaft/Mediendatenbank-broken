@@ -13,30 +13,30 @@ class UserController{
         }
     }
 
-    public function loginView() {
-        try {
-
-             $username = $_POST['username'] ?? '';
-             $passwort = $_POST['passwort'] ?? '';
-            
-           
-        } catch (Exception $e) {
-            return "An error occurred: " . $e->getMessage();
-        }
-    }
-
     public function logInView() {
         try {
 
-            $username = $_POST['username'] ?? '';
-            $vorname = $_POST['vorname'] ?? '';
-            $nachname = $_POST['nachname'] ?? '';
-            $istAdmin = isset($_POST['istAdmin']) ? filter_var($_POST['istAdmin'], FILTER_VALIDATE_BOOLEAN) : false;
+            $isLoginOrRegister = $_POST['isLoginOrRegister'] ?? '';
             $passwort = $_POST['passwort'] ?? '';
-            
-            $user = new UserModel(1, $vorname, $nachname, $istAdmin, $username, $passwort);
+            $username = $_POST['username'] ?? '';
 
-            return $user;
+            if($isLoginOrRegister == "login"){
+
+                //Check credentials through Repository
+
+                header('Location: /User');
+            } else if($isLoginOrRegister == "register"){
+
+                $vorname = $_POST['vorname'] ?? '';
+                $nachname = $_POST['nachname'] ?? '';
+                $istAdmin = isset($_POST['istAdmin']) ? filter_var($_POST['istAdmin'], FILTER_VALIDATE_BOOLEAN) : false;
+                header('Location: /Login');
+
+                //Check if user already exists through Repository
+
+                $user = new UserModel(1, $vorname, $nachname, $istAdmin, $username, $passwort);
+            }
+            
 
         } catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
