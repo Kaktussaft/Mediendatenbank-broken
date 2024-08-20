@@ -1,6 +1,6 @@
 <?php
 
-namespace Webapp\src\Routing;
+namespace WEB42\src\Routing;
 
 class Router {
 

@@ -1,14 +1,14 @@
 <?
 
-namespace Webapp\src\Routing;
+namespace WEB42\src\Routing;
 
 require 'Routing.Router.php';
 require 'UserController.php';
 require 'MediumController.php';
 
-use Webapp\src\Controller\UserController;
-use Webapp\src\Controller\MediumController;
-use Webapp\src\Routing\Router;
+use WEB42\src\Controller\UserController;
+use WEB42\src\Controller\MediumController;
+use WEB42\src\Routing\Router;
 
 // DB connection
 

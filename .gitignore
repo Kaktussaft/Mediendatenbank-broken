@@ -1,2 +1,4 @@
 # Ignore Visual Studio Code settings
 .vscode/
+settings.json
+launch.jason

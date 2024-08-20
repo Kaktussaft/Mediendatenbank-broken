@@ -1,7 +1,7 @@
 <?php
 
-namespace Webapp\src\Controller;
-use Webapp\src\Model\MediumModel;
+namespace WEB42\src\Controller;
+use WEB42\src\Model\MediumModel;
 use Exception;
 
 class MediumController{

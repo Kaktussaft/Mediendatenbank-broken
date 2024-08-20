@@ -1,6 +1,6 @@
 <?php
 
-namespace Webapp\src\Model;
+namespace WEB42\src\Model;
 
 class UserModel
 {
@@ -20,9 +20,9 @@ class UserModel
         $this->username = $username;
     }
 
-    public const PFAD_LANDING_PAGE = "Mediendatenbank/WEB42/Webapp/view/LandingPage.html";
-    public const PFAD_LOGIN = "Mediendatenbank/WEB42/Webapp/view/Login.html";
-    public const PFAD_USER_VIEW = "Mediendatenbank/WEB42/Webapp/view/User.html";
-    public const PFAD_ADMIN_VIEW = "Mediendatenbank/WEB42/Webapp/view/Admin.html"; 
+    public const PFAD_LANDING_PAGE = "Mediendatenbank/WEB42/WEB42/view/LandingPage.html";
+    public const PFAD_LOGIN = "Mediendatenbank/WEB42/WEB42/view/Login.html";
+    public const PFAD_USER_VIEW = "Mediendatenbank/WEB42/WEB42/view/User.html";
+    public const PFAD_ADMIN_VIEW = "Mediendatenbank/WEB42/WEB42/view/Admin.html"; 
     
 }

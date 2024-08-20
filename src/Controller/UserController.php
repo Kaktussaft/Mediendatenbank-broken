@@ -1,8 +1,8 @@
 <?php
 
-namespace Webapp\src\Controller;
+namespace WEB42\src\Controller;
 
-use Webapp\src\Model\UserModel;
+use WEB42\src\Model\UserModel;
 use Exception;
 
 class UserController
