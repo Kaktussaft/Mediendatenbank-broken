@@ -1,6 +1,8 @@
-<?php
+<?
 
-require 'Router.php';
+namespace Webapp\src\Routing;
+
+require 'Routing.Router.php';
 require 'UserController.php';
 require 'MediumController.php';
 
@@ -14,22 +16,24 @@ $router = new Router();
 $userController = new UserController;
 $mediumController = new MediumController;
 
-$router->addRoute("POST",  "/LandingPage", [$userController, "moveToLoginPage"]);
-$router->addRoute("POST", "/Login", [$userController, "login"]);
-$router->addRoute("POST", "/User", [$userController, "logout"]);
-$router->addRoute("POST", "/Admin", [$userController, "toggleAdminView"]);
+$router->post("/LandingPage", [$userController, "moveToLoginPage"]);
+$router->post("/Login", [$userController, "login"]);
+$router->post("/User", [$userController, "logout"]);
+$router->post("/Admin", [$userController, "toggleAdminView"]);
 
-$router->addRoute("DELETE", "/USER", [$mediumController, "deleteMedium"]);
-$router->addRoute("DELETE", "/ADMIN", [$userController, "deleteUser"]); //not a requirement, implementation for testing purposes
+$router->delete("/USER", [$mediumController, "deleteMedium"]);
+$router->delete("/ADMIN", [$userController, "deleteUser"]); //not a requirement, implementation for testing purposes
 
-$router->addRoute("PUT", "/USER", [$mediumController, "updateMedium"]);
-$router->addRoute("PUT", "/USER", [$mediumController, "uploadMedium"]);
-$router->addRoute("PUT", "/ADMIN", [$mediumController, "updateKeywords"]);
-$router->addRoute("PUT", "/ADMIN", [$userController, "updateUser"]); //not a requirement, implementation for testing purposes
+$router->put("/USER", [$mediumController, "updateMedium"]);
+$router->put("/USER", [$mediumController, "uploadMedium"]);
+$router->put("/ADMIN", [$mediumController, "updateKeywords"]);
+$router->put("/ADMIN", [$userController, "updateUser"]); //not a requirement, implementation for testing purposes
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['REQUEST_URI'];
 
+$method = $_SERVER['REQUEST_METHOD'];
+$path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $response = $router->dispatch($method, $path);
 echo $response;
 

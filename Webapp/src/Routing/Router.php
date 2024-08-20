@@ -1,6 +1,6 @@
 <?php
 
-namespace Webapp;
+namespace Webapp\src\Routing;
 
 class Router {
 
@@ -14,15 +14,15 @@ class Router {
         ];
     }
 
-    public function post(string $path, string $action) {
+    public function post(string $path, array $action) {
         $this->routes['POST'][$path] = $action;
     }
 
-    public function put(string $path, string $action) {
+    public function put(string $path, array $action) {
         $this->routes['PUT'][$path] = $action;
     }
 
-    public function delete(string $path, string $action) {
+    public function delete(string $path, array $action) {
         $this->routes['DELETE'][$path] = $action;
     }
 
