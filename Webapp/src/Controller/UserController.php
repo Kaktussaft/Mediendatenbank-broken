@@ -66,4 +66,26 @@ class UserController{
             return "An error occurred: " . $e->getMessage();
         }
     }
+
+    public function deleteUser() {
+        try {
+             $username = $_DELETE['username'] ?? '';
+        } catch (Exception $e) {
+            return "An error occurred: " . $e->getMessage();
+        }
+    }
+
+    public function updateUser() {
+        try {
+            
+            $username = $_PUT['username'] ?? '';
+            $vorname = $_PUT['vorname'] ?? '';
+            $nachname = $_PUT['nachname'] ?? '';
+            $istAdmin = isset($_PUT['istAdmin']) ? filter_var($_PUT['istAdmin'], FILTER_VALIDATE_BOOLEAN) : false;
+            $passwort = $_PUT['passwort'] ?? '';
+
+        } catch (Exception $e) {
+            return "An error occurred: " . $e->getMessage();
+        }
+    }
 }
