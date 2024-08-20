@@ -15,7 +15,7 @@ $mediumController = new MediumController;
 
 $router->addRoute("POST",  "/LandingPage", [$userController, "landingPageView"]);
 $router->addRoute("POST", "/Login", [$userController, "loginView"]);
-$router->addRoute("POST", "/User", [$userController, "userView"]);
+$router->addRoute("POST", "/User", [$userController, "logout"]);
 $router->addRoute("POST", "/Admin", [$userController, "adminView"]);
 
 
