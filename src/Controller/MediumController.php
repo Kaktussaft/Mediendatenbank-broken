@@ -1,6 +1,6 @@
 <?php
 
-namespace WEB42\src\Controller;
+namespace src\Controller;
 use WEB42\src\Model\MediumModel;
 use Exception;
 

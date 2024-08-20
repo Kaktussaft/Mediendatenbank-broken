@@ -1,11 +1,11 @@
 <?php
-namespace WEB42\src\Controller;
 
-use WEB42\src\Controller\UserController;
-
-$usercontroller = new UserController();
+namespace scr\View;
+use src\Controller\UserController;
 
 $username = $_POST['username'] ?? '';
+echo $username;
+$usercontroller = new UserController();
 $usercontroller->login($username);
 ?>
 
@@ -28,6 +28,7 @@ $usercontroller->login($username);
     </div>
 </body>
 </html>
+
 
 
 
