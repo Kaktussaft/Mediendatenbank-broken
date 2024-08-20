@@ -7,8 +7,7 @@ class UserController{
 
     public function landingPageView() {
         try {
-            // Logic to handle the landing page view
-            return "Landing Page";
+        header('Location: /Login');
         } catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
         }
@@ -16,26 +15,53 @@ class UserController{
 
     public function loginView() {
         try {
-            // Logic to handle the login view
-            return "Login Page";
+
+             $username = $_POST['username'] ?? '';
+             $passwort = $_POST['passwort'] ?? '';
+            
+           
         } catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
         }
     }
 
-    public function userView() {
+    public function logInView() {
         try {
-            // Logic to handle the user view
-            return "User Page";
+
+            $username = $_POST['username'] ?? '';
+            $vorname = $_POST['vorname'] ?? '';
+            $nachname = $_POST['nachname'] ?? '';
+            $istAdmin = isset($_POST['istAdmin']) ? filter_var($_POST['istAdmin'], FILTER_VALIDATE_BOOLEAN) : false;
+            $passwort = $_POST['passwort'] ?? '';
+            
+            $user = new UserModel(1, $vorname, $nachname, $istAdmin, $username, $passwort);
+
+            return $user;
+
         } catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
+        }
+    }
+
+    public function logout() {
+        try {
+
+            $isLogoutOrSwitchAdminView = $_POST['isLogoutOrSwitchAdminView'] ?? '';
+
+            if(isLogoutOrSwitchAdminView == "logout"){
+                header('Location: /LandingPage');
+            else if(isLogoutOrSwitchAdminView == "switchAdminView"){
+                header('Location: /Admin');
+            }
+        } catch (Exception $e) {
+            return "An error occurred: " . $e->getMessage();
+        }
         }
     }
 
     public function adminView() {
         try {
-            // Logic to handle the admin view
-            return "Admin Page";
+            header('Location: /User');
         } catch (Exception $e) {
             return "An error occurred: " . $e->getMessage();
         }
