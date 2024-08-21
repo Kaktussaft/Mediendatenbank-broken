@@ -1,14 +1,3 @@
-<?php
-
-namespace scr\View;
-use src\Controller\UserController;
-
-$username = $_POST['username'] ?? '';
-echo $username;
-$usercontroller = new UserController();
-$usercontroller->login($username);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
