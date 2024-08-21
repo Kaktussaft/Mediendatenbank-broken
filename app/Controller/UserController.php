@@ -17,9 +17,9 @@ class UserController extends Controller
     //     switch ($this->sortRequest) {
     //         case 'register':
     //             $username = $_POST['username'] ?? '';
-    //             $vorname = $_POST['vorname'] ?? '';
-    //             $nachname = $_POST['nachname'] ?? '';
-    //             $this->register($username,  $vorname,  $nachname);
+    //             $name = $_POST['name'] ?? '';
+    //             $surname = $_POST['surname'] ?? '';
+    //             $this->register($username,  $name,  $surname);
     //             break;
     //         case 'login':
     //             $username = $_POST['username'] ?? '';
@@ -36,10 +36,10 @@ class UserController extends Controller
     //             break;
     //         case 'updateUser':
     //             $username = $_PUT['username'] ?? '';
-    //             $vorname = $_PUT['vorname'] ?? '';
-    //             $nachname = $_PUT['nachname'] ?? '';
-    //             $istAdmin = $_PUT['istAdmin'] ?? '';
-    //             $this->updateUser($username,  $vorname,  $nachname,  $istAdmin);
+    //             $name = $_PUT['name'] ?? '';
+    //             $surname = $_PUT['surname'] ?? '';
+    //             $isAdmin = $_PUT['isAdmin'] ?? '';
+    //             $this->updateUser($username,  $name,  $surname,  $isAdmin);
     //             break;
     //         default:
     //             echo "An error occurred: No valid identifier found";
@@ -63,9 +63,9 @@ class UserController extends Controller
             return "An error occurred: " . $e->getMessage();
         }
     }
-    public function register(string $username, string $vorname, string $nachname)
+    public function register(string $username, string $name, string $surname)
     {
-        $user = new UserModel(1, $vorname, $nachname, false, $username);
+        $user = new UserModel(1, $name, $surname, false, $username);
     }
 
     public function logout()
@@ -105,7 +105,7 @@ class UserController extends Controller
         }
     }
 
-    public function updateUser($username,  $vorname,  $nachname,  $istAdmin)
+    public function updateUser($username,  $name,  $surname,  $isAdmin)
     {
         try {
 

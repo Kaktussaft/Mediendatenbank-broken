@@ -2,22 +2,29 @@
 
 namespace src\Model;
 
+use DateTime;
+
 class UserModel
 {
     public int $id;
-    public string $vorname;
-    public string $nachname;
-    public bool $istAdmin;
+    public string $name;
+    public string $surname;
     public string $username;
+    public DateTime $registrationDate;
+    public bool $isAdmin;
+    public string $email; 
+    
 
 
-    public function __construct(int $id, string $vorname, string $nachname, bool $istAdmin, string $username)
+    public function __construct(int $id, string $name, string $surname, string $username, DateTime $registrationDate, bool $isAdmin,   string $email)
     {
         $this->id = $id;
-        $this->vorname = $vorname;
-        $this->nachname = $nachname;
-        $this->istAdmin = $istAdmin;
+        $this->name = $name;
+        $this->surname = $surname;
         $this->username = $username;
+        $this->registrationDate = $registrationDate;
+        $this->isAdmin = $isAdmin;
+        $this->email = $email;
     }
 
     public const PFAD_LANDING_PAGE = "Mediendatenbank/WEB42/src/View/LandingPage.php";
