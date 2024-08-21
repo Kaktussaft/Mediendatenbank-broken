@@ -1,10 +1,13 @@
 <?php
 
 namespace src\Controller;
+
+use Controller;
 use WEB42\src\Model\MediumModel;
 use Exception;
 
-class MediumController{
+class MediumController extends Controller
+{
 
     public function deleteMedium() {
         try {
