@@ -1,9 +1,7 @@
 <?php
 
-namespace Webapp\src\Controller;
-use Webapp\src\Model\MediumModel;
-
-class MediumController{
+class MediumController extends Controller
+{
 
     public function deleteMedium() {
         try {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webapp\src\Model;
+namespace WEB42\src\Model;
 
 class MediumModell
 {
