@@ -1,11 +1,5 @@
 <?php
 
-namespace src\Controller;
-
-use Controller;
-use WEB42\src\Model\MediumModel;
-use Exception;
-
 class MediumController extends Controller
 {
 
