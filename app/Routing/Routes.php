@@ -6,9 +6,9 @@ require 'Routing.Router.php';
 require 'UserController.php';
 require 'MediumController.php';
 
-use WEB42\src\Controller\UserController;
-use WEB42\src\Controller\MediumController;
-use WEB42\src\Routing\Router;
+use src\Controller\UserController;
+use src\Controller\MediumController;
+use src\Routing\Router;
 
 // DB connection
 
