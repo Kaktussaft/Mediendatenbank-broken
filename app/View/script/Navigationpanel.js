@@ -1,3 +1,3 @@
-function test(string){
+function test2(string){
     window.alert(string)
 }
