@@ -12,7 +12,7 @@ class App
     {
         $url = $this->parseUrl();
 
-        if (file_exists('../app/controller/' . $url[0] . '.php')) {
+        if ($url && file_exists('../app/controller/' . $url[0] . '.php')) {
             $this->controller = $url[0];
             unset($url[0]);
         }
