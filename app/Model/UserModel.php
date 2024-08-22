@@ -1,7 +1,5 @@
 <?php
 
-namespace src\Model;
-
 use DateTime;
 
 class UserModel
