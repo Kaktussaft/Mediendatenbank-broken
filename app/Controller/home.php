@@ -7,7 +7,7 @@ class Home extends Controller
     //  $user = $this->model('UserModel');
     //  $user->name = 'Alex';
 
-     $this->view('home/LandingPage', ['name' => $name]);
+     $this->view('LandingPage', ['name' => $name]);
    }
  
 }
