@@ -2,7 +2,6 @@
 
 class App
 {
-    //these are the default values when nothing valid is passed
 
     protected $controller = 'home';
     protected $method = 'index';
