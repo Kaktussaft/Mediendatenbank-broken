@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
-    <script type="text/javascript" src="script/RegistrationPopup.js"></script>
+    <script type="text/javascript" src="script/SharedScripts.js"></script>
 </head>
 <body>
     <h1>Landing Page</h1>
@@ -18,7 +18,6 @@
                 <a href="javascript:void(0);" onclick="test('test')">hier.</a>
             </p>
         </form>
-       <?php echo $data;?>
     </div>
 </body>
 </html>

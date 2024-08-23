@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
-    <script type="text/javascript" src="script/UploadPopup.js"></script>
-    <script type="text/javascript" src="script/Navigationpanel.js"></script>
-    <script type="text/javascript" src="script/ModifyLabelsPopup.js"></script>
-    <script type="text/javascript" src="script/ModifyAccountPopup.js"></script>
+    <script type="text/javascript" src="script/SharedScripts.js"></script>
 </head>
 <body>
     <h1>Userview</h1>

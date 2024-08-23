@@ -23,11 +23,5 @@ class UserModel
         $this->registrationDate = $registrationDate;
         $this->isAdmin = $isAdmin;
         $this->email = $email;
-    }
-
-    public const PFAD_LANDING_PAGE = "Mediendatenbank/WEB42/src/View/LandingPage.php";
-    public const PFAD_LOGIN = "Mediendatenbank/WEB42/WEB42/view/Login.html";
-    public const PFAD_USER_VIEW = "Mediendatenbank/WEB42/WEB42/view/User.html";
-    public const PFAD_ADMIN_VIEW = "Mediendatenbank/WEB42/WEB42/view/Admin.html"; 
-    
+    }   
 }
