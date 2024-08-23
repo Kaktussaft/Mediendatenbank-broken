@@ -9,7 +9,7 @@
 <body>
     <h1>Landing Page</h1>
     <div>
-        <form action="../Controller/UserController.php" method="POST">
+        <form id="loginForm" action="UserController/login/" method="POST" onsubmit="updateFormLoginAction()">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="hidden" name="Routing" value="login">
@@ -18,9 +18,18 @@
                 <a href="javascript:void(0);" onclick="test('test')">hier.</a>
             </p>
         </form>
+       <?php echo $data;?>
     </div>
 </body>
 </html>
+
+<script>
+    function updateFormLoginAction(){
+        var username = document.getElementById('username').value;
+        var form = document.getElementsByTagName('form')[0];
+        form.action = 'UserController/login/' + username;
+    }
+</script>
 
 
 
