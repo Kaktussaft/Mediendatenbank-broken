@@ -26,8 +26,17 @@
             <span class="close" id="close-registration-modal">&times;</span>
             <h2>Registrierung</h2>
             <form>
-                <label for="name">Name:</label><br>
+            <label for="username">Username:</label>
                 <input type="text" id="name" name="name" required>
+                <br>
+                <label for="email">E-Mail:</label>
+                <input type="text" id="email" name="email" required>
+                <br>
+                <label for="lastname">Nachname:</label>
+                <input type="text" id="lastname" name="lastname" required>
+                <br>
+                <label for="firstname">Vorname:</label>
+                <input type="text" id="firstname" name="firstname" required>
                 <br><br>
                 <button type="submit">Registrieren</button>
             </form>
