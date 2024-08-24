@@ -17,7 +17,7 @@
             <button type="submit">Login</button>
         </form>
         <p>Noch keinen Login? Registriere dich 
-            <a href="LandingPage.php" id="open-registration-modal">hier.</a>
+            <a href="#" id="open-registration-modal">hier.</a>
         </p>
     </div>
 
