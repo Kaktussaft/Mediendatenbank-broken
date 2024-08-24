@@ -2,7 +2,6 @@
 
 class App
 {
-
     protected $controller = 'home';
     protected $method = 'index';
     protected $params = [];
@@ -28,6 +27,7 @@ class App
         }
 
         $this->params = $url ? array_values($url) : [];
+        unset($url);
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
