@@ -2,24 +2,32 @@
 namespace App\Controller;
 
 use App\Core\Controller;
+use App\Model\UserModel;
+use App\Repository\UserRepository;
 
 class UserController extends Controller
 {
+    private $currentUser; 
+    private $userRepository;
+
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository();
+    }
+
     public function login($username = '')
     {
-        if ($username == '1234') {
-            $this->view('User', ['username' => $username]);
-        }
-        else{          
+        $userExists = $this->userRepository->readUserByUsername($username);
+        if (!$userExists){
             header('Location: http://localhost/Mediendatenbank/public/');
-            exit();
+            exit(); 
         }
+        $this->currentUser = $userExists;
+        $this->view('User', ['username' => $username]);
     }
     public function register(string $username = '', string $email = '', string $nachname = '', string $vorname = '')
     {
-        require_once '../app/model/UserModel.php';
-        
-
+       
         $this->view('LandingPage', 'Registration successful');
     }
     public function toggleAdminView($username = '')
@@ -31,5 +39,11 @@ class UserController extends Controller
             header('Location: http://localhost/Mediendatenbank/public/');
             exit();
         }
+    }
+    public function logout()
+    {
+        header('Location: http://localhost/Mediendatenbank/public/');
+        $currentUser = null;
+        exit();
     }
 }
