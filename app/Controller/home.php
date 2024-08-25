@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Core\Controller;
 
-class Home 
+class Home extends Controller
 {
    public function index($name = '')   //calling in models
    {
