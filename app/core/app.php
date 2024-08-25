@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+
 class App
 {
     protected $controller = 'home';
