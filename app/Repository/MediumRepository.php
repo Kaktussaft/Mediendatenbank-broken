@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repository;
+
 class MediumRepository{
 
     public static function createPhotoMedium($photo){

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repository;
+
 class UserRepository{
 
     public static function create($user){
