@@ -1,8 +1,4 @@
 <?php
-namespace App\Controller;
-
-use App\Core\Controller;
-use Exception;
 
 class MediumController extends Controller
 {

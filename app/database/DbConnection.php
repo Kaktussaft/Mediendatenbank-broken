@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Database;
-
 class Database{
+
 
 public static $host = 'localhost';
 public static $dbName = 'WEB42';

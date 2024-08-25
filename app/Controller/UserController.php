@@ -1,7 +1,4 @@
 <?php
-namespace App\Controller;
-
-use App\Core\Controller;
 
 class UserController extends Controller
 {
@@ -15,10 +12,8 @@ class UserController extends Controller
             exit();
         }
     }
-    public function register(string $username = '', string $email = '', string $nachname = '', string $vorname = '')
+    public function register()
     {
-        require_once '../app/model/UserModel.php';
-        
 
         $this->view('LandingPage', 'Registration successful');
     }
