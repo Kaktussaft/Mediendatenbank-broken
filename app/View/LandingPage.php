@@ -54,6 +54,7 @@
         var form = document.getElementsByTagName('form')[0];
         form.action = 'UserController/login/' + username;
     };
+    
     initModal('registrationModal', 'open-registration-modal', 'close-registration-modal');
 
 </script>
