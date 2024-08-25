@@ -2,16 +2,18 @@
 
 namespace App\Core;
 
+use App\Controller\Home;
 
 class App
 {
-    protected $controller = 'home';
+    protected $controller = 'Home';
     protected $method = 'index';
     protected $params = [];
 
     public function __construct()
     {
         $url = $this->parseUrl();
+        var_dump($url);
 
         if ($url && file_exists('../app/controller/' . $url[0] . '.php')) {
             $this->controller = $url[0];
@@ -19,6 +21,7 @@ class App
         }
 
         require_once '../app/controller/' . $this->controller . '.php';
+        var_dump($this->controller);
         $this->controller = new $this->controller;
 
         if (isset($url[1])) {
@@ -37,7 +40,9 @@ class App
     public function parseUrl()
     {
         if (isset($_GET['url'])) {
-            return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+            $parsedUrl =  explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+            var_dump($parsedUrl);
+            return $parsedUrl;
         }
     }
 }
