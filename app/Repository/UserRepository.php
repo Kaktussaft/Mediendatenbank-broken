@@ -1,21 +1,28 @@
 <?php
 
+namespace App\Repository;
+
+use App\Model\UserModel;
+
+
+
 class UserRepository{
 
-    public static function create($user){
+    //$this-> usermodel = new UserModel();
+
+    public static function createUser($user){
 
     }
 
-    public static function read($id){
+    public static function readUserByUsername($username){
+        //return false if not, return a user object if exists
+        return true;
+    }
+    public static function readAllUser(){
 
     }
-    public static function readAll(){
+    public static function updateUser($user){
 
     }
-    public static function update($user){
 
-    }
-    public static function delete($id){
-
-    }
 }

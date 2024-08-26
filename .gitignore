@@ -1,4 +1,5 @@
 # Ignore Visual Studio Code settings
 .vscode/
-settings.json
-launch.jason
+phpinfo.php
+vendor/
+composer.lock

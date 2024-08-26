@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,13 @@
     <script type="text/javascript" src="../app/View/script/SharedScripts.js"></script>
     <link rel="stylesheet" href="../app/View/style/PopUps.css">
 </head>
+
 <body>
     <h1>Userview</h1>
     <div class="modifyAccountAndLogout">
-    <a href="#" id="open-accountModification-modal">Konto</a>
-        <a href="">Logout</a>
+        <a href="#" id="open-accountModification-modal">Konto</a>
+        <a href="#" id="logout">Logout</a>
+        <a href="#" id="toggle-admin-view">Adminview</a>
     </div>
     <div class="uploadButton">
         <button id="open-upload-modal">Neu...</button>
@@ -76,7 +79,7 @@
             </form>
         </div>
     </div>
-    
+
     <div id="modifyLabelModal" class="modal">
         <div class="modal-content">
             <span class="close" id="close-modifylabel-modal">&times;</span>
@@ -84,11 +87,25 @@
             <p>Hier entsteht noch eine Logik fürs Bearbeiten der Schlagwörter.</p>
         </div>
     </div>
-</body>
-</html>
 
-<script>
-    initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal');
-    initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');
-    initModal('modifyLabelModal', 'open-modifylabel-modal', 'close-modifylabel-modal')
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal');
+            // initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');
+            // initModal('modifyLabelModal', 'open-modifylabel-modal', 'close-modifylabel-modal');
+
+            document.getElementById('toggle-admin-view').addEventListener('click', function(event) {
+                event.preventDefault();
+                history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleAdminView/');
+                window.location.reload();
+            });
+            document.getElementById('logout').addEventListener('click', function(event) {
+                event.preventDefault();
+                history.replaceState(null, '', '/Mediendatenbank/public/UserController/logout/');
+                window.location.reload();
+            });
+        });
+    </script>
+</body>
+
+</html>
