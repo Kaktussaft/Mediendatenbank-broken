@@ -22,24 +22,34 @@ class UserController extends Controller
             header('Location: http://localhost/Mediendatenbank/public/');
             exit(); 
         }
-        $this->currentUser = $userExists;
+        //$this->currentUser = $userExists;
         $this->view('User', ['username' => $username]);
     }
+
     public function register(string $username = '', string $email = '', string $nachname = '', string $vorname = '')
     {
        
         $this->view('LandingPage', 'Registration successful');
     }
-    public function toggleAdminView($username = '')
+
+    public function toggleAdminView()
     {
-        if ($username == '1234') {
-            $this->view('Admin', ['username' => $username]);
-        }
-        else{          
-            header('Location: http://localhost/Mediendatenbank/public/');
-            exit();
-        }
+        $this->view('Admin');
+        // if($this->currentUser->isAmdmin())
+        // {
+        // $this->view('Admin', ['username' => $username]);
+        // }
+        // else
+        // {
+           
+        //     //tell user he is not allowed to view this page
+        // }
     }
+    public function toggleUserView()
+    {
+        $this->view('User');
+    }
+
     public function logout()
     {
         header('Location: http://localhost/Mediendatenbank/public/');
