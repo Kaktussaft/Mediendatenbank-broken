@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Model\UserModel;
 
-class UserRepository{
 
 
 class UserRepository{
