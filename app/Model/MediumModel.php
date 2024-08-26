@@ -13,9 +13,8 @@ class MediumModel
     private string $description;
     private string $type;
 
-    public function __construct( int $id, string $title, DateTime $uploadDate, string $fileSize, string $description, string $type)
+    public function __construct( string $title, DateTime $uploadDate, string $fileSize, string $description, string $type)
     {
-        $this->id = $id;
         $this->title = $title;
         $this->uploadDate = $uploadDate;
         $this->fileSize = $fileSize;

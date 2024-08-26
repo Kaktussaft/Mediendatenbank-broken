@@ -14,9 +14,8 @@ class UserModel
     private bool $isAdmin;
     private string $email; 
     
-    public function __construct(int $id, string $name, string $surname, string $username, DateTime $registrationDate, bool $isAdmin,   string $email)
+    public function __construct(string $name, string $surname, string $username, DateTime $registrationDate, bool $isAdmin,   string $email)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
         $this->username = $username;
