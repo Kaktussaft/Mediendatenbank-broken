@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <script type="text/javascript" src="../app/View/script/SharedScripts.js"></script>
     <link rel="stylesheet" href="../app/View/style/PopUps.css">
 </head>
+
 <body>
     <h1>Adminview</h1>
     <div class="modifyAccountAndLogout">
-        <a href="User.html">-> Userview</a>
+        <a href="#" id="toggle-user-view">-> Userview</a>
         <a href="#" id="open-accountModification-modal">Konto</a>
-        <a href="">Logout</a>
+        <a href="#" id="logout">Logout</a>
     </div>
     <div class="navigationpanel">
         <button onclick="test2('hier wird navigiert')">Dashboard</button>
@@ -44,9 +46,24 @@
             </form>
         </div>
     </div>
-</body>
-</html>
 
-<script>
-    initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal')
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           // initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal')
+
+            document.getElementById('toggle-user-view').addEventListener('click', function(event) {
+                event.preventDefault();
+                history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleUserView/');
+                window.location.reload();
+            });
+
+            document.getElementById('logout').addEventListener('click', function(event) {
+                event.preventDefault();
+                history.replaceState(null, '', '/Mediendatenbank/public/UserController/logout/');
+                window.location.reload();
+            });
+        });
+    </script>
+</body>
+
+</html>
