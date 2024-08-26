@@ -6,6 +6,7 @@ use App\Model\UserModel;
 use App\Repository\UserRepository;
 use DateTime;
 
+
 class UserController extends Controller
 {
     private $currentUser; 
@@ -40,6 +41,7 @@ class UserController extends Controller
             $this->view('LandingPage', 'Username already exists');
         }
     }
+
 
     public function toggleAdminView()
     {

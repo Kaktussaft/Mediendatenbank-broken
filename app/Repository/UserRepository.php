@@ -6,6 +6,9 @@ use App\Model\UserModel;
 
 class UserRepository{
 
+
+class UserRepository{
+
     //$this-> usermodel = new UserModel();
 
     public static function createUser($user){

@@ -1,6 +1,4 @@
 <?php
-namespace App\Database;
-
 
 Create database Web42;  
 
