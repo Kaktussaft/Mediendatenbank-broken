@@ -1,23 +1,8 @@
 <?php
 
-#---------------------------------------------------------------------------
-#						Verbindung herstellen
-#---------------------------------------------------------------------------
+use App\Database\DbConnection;
 
-# Verbindung zu MySQL herstellen
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "Mediendatenbank";
-
-// Verbindung herstellen
-$conn = new mysqli($servername, $username, $password);
-
-// Verbindung prüfen
-if ($conn->connect_error) {
-    die("Verbindung fehlgeschlagen: " . $conn->connect_error);
-}
-echo "Verbindung erfolgreich";
+$conn = DbConnection::getInstance()->getConnection();
 
 #---------------------------------------------------------------------------
 #						Erstelle Datenbank Mediendatenbank
@@ -78,10 +63,13 @@ if ($conn->query($sql) === TRUE) {
 #---------------------------------------------------------------------------
 
 $sql = "CREATE TABLE Ebooks 
-(ebook_ID int auto_increment primary key, Titel varchar(30) not null, 
-Beschreibung varchar(50), Typ varchar(10) not null, 
+(ebook_ID int auto_increment primary key, 
+Titel varchar(30) not null, 
+Beschreibung varchar(50), 
+Typ varchar(10) not null, 
 Dateigröße varchar(20) not null, 
-Hochlade_datum date not null, Autor varchar(30), 
+Hochlade_datum date not null, 
+Autor varchar(30), 
 Seitenzahl int, Benutzer_ID int not null, 
 foreign key(Benutzer_ID) References Benutzer(Benutzer_ID))";
 
@@ -96,10 +84,12 @@ if ($conn->query($sql) === TRUE) {
 #---------------------------------------------------------------------------
 
 $sql = "CREATE TABLE Hörbücher 
-(Hörbuch_ID int auto_increment primary key, Titel varchar(30) not null, 
+(Hörbuch_ID int auto_increment primary key, 
+Titel varchar(30) not null, 
 Beschreibung varchar(50), Typ varchar(10) not null, 
 Dateigröße varchar(20) not null, 
-Hochlade_datum date not null, Sprecher varchar(30), 
+Hochlade_datum date not null, 
+Sprecher varchar(30), 
 Dauer time, Benutzer_ID int not null, 
 foreign key(Benutzer_ID) References Benutzer(Benutzer_ID))";
 
@@ -114,7 +104,8 @@ if ($conn->query($sql) === TRUE) {
 #---------------------------------------------------------------------------
 
 $sql = "CREATE TABLE Videos (Video_ID int auto_increment primary key, 
-Titel varchar(30) not null, Beschreibung varchar(50), 
+Titel varchar(30) not null, 
+Beschreibung varchar(50), 
 Typ varchar(10) not null, 
 Dateigröße varchar(20) not null, 
 Hochlade_datum date not null, 
