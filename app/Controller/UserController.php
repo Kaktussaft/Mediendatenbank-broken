@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Core\Controller;
@@ -9,39 +10,42 @@ use DateTime;
 
 class UserController extends Controller
 {
-    private $currentUser; 
+    private $currentUser;
     private $userRepository;
 
-  
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository();
+    }
+
     public function login($username = '')
     {
-        // $userExists = $this->userRepository->readUserByUsername($username);
-        // if (!$userExists){
-        //     header('Location: http://localhost/Mediendatenbank/public/');
-        //     exit(); 
-        // }
-        //$this->currentUser = $userExists;
-        $this->view('User', ['username' => $username]);
+        $userExists = $this->userRepository->readUserByUsername($username);
+
+        if (!$userExists) {
+            header('Location: http://localhost/Mediendatenbank/public/');
+            exit();
+        } else {
+            $getUser = $this->userRepository->getUserByUsername($username);
+            $this->currentUser = $getUser;
+            $this->view('User', ['username' => $username]);
+        }
     }
 
-    public function register( string $name, string $surname, string $username, string $email)
-    {
-        $userRepository = new UserRepository();
-        $userExists = $userRepository->readUserByUsername($username);
+    public function register(string $name, string $surname, string $username, string $email) {
+        $userExists = $this->userRepository->readUserByUsername($username);
 
-        if(!$userExists)
-        {
+        if (!$userExists) {
             $currentDateTime = new DateTime();
-            $user = new UserModel($name,$surname,$ $username, $currentDateTime, false, $email);
-            $userRepository->createUser($user);
-             $this->view('LandingPage', 'Registration successful');
-        }
-        else
-        {
-            $this->view('LandingPage', 'Username already exists');
+            list($name, $surname, $username, $email) = $this->sanitizeUserInput($name, $surname, $username, $email);
+            $user = new UserModel($name, $surname, $username, $currentDateTime, false, $email);
+            $this->userRepository->createUser($user);
+            header('Location: http://localhost/Mediendatenbank/public/');
+        } else {
+            header('Location: http://localhost/Mediendatenbank/public/');
+            exit();
         }
     }
-
 
     public function toggleAdminView()
     {
@@ -52,7 +56,7 @@ class UserController extends Controller
         // }
         // else
         // {
-           
+
         //     //tell user he is not allowed to view this page
         // }
     }
