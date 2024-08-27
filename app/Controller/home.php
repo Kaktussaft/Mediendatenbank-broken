@@ -7,7 +7,7 @@ use App\Core\App;
 
 class Home extends Controller
 {
-   public function index($name = '')   //calling in models
+   public function index($name = '')  
    {
      $this->view('LandingPage', ['name' => $name]);
    }
