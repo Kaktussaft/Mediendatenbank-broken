@@ -45,7 +45,6 @@ class UserRepository
 
     public function getUserByUsername($username)
     {
-
         $stmt = $this->conn->prepare("SELECT * FROM Benutzer WHERE Benutzername = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -55,5 +54,7 @@ class UserRepository
         $stmt->close();
         return $user;
     }
-    public function updateUser($user) {}
+    public function updateUser($user) {
+        
+    }
 }
