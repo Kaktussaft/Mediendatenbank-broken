@@ -4,16 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>MyMediaSpace</title>
     <script type="text/javascript" src="../app/View/script/SharedScripts.js"></script>
+    <!-- Stylesheets for live website 
+    <link rel="stylesheet" href="../app/View/style/Layout.css">
     <link rel="stylesheet" href="../app/View/style/PopUps.css">
+    -->
+    <!-- Stylesheets for testing -->
+    <link rel="stylesheet" href="style/Layout.css">
+    <link rel="stylesheet" href="style/PopUps.css">
+    
+
 </head>
 
 <body>
-    <h1>Landing Page</h1>
+
+    <div class="welcomeMessage">
+        <h1>Nutze den unendlichen Raum für deine Medien!</h1>
+    </div>
+
     <div class="loginForm">
-        <form id="loginForm" action="" method="POST" onsubmit="updateFormLoginAction()">
-            <label for="username">Username:</label>
+        <form id="loginForm" action="UserController/login/" method="POST" onsubmit="updateFormLoginAction()">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="hidden" name="Routing" value="login">
             <button type="submit">Login</button>
