@@ -29,7 +29,7 @@
             <input type="submit" value="Login" class="loginButton">
             <input type="hidden" name="Routing" value="login">
         </form>
-        <p>Noch keinen Login? Registriere dich <a href="#" id="open-registration-modal">hier.</a></p>
+        <p>Noch keinen Login?<br>Registriere dich <a href="#" id="open-registration-modal">hier.</a></p>
     </div>
 
     <div id="registrationModal" class="modal">
