@@ -2,26 +2,35 @@
 
 namespace App\Database;
 
-use PDO;
-use PDOException;
-
-class Database
+class DbConnection
 {
+    private static $instance = null;
+    private $conn;
 
-    public static $host = 'localhost';
-    public static $dbName = 'WEB42';
-    public static $username = 'root';
-    public static $password = '';
+    public static $servername = "localhost";
+    public static $username = "root";
+    public static $password = "";
+    public static $database = "web42"; // Datenbankname
 
-    public static function connect()
+    private function __construct()
     {
-        try {
-            $pdo = new PDO("mysql:host=" . self::$host . ";dbname=" . self::$dbName . ";charset=utf8", self::$username, self::$password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+        $this->conn = new \mysqli(self::$servername, self::$username, self::$password, self::$database);
+
+        if ($this->conn->connect_error) {
+            die("Verbindung fehlgeschlagen: " . $this->conn->connect_error);
         }
     }
-}
 
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            self::$instance = new DbConnection();
+        }
+
+        return self::$instance;
+    }
+    public function getConnection()
+    {
+        return $this->conn;
+    }
+}
