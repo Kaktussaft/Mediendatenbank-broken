@@ -1,5 +1,6 @@
 <?php
 
+require_once 'DbConnection.php';
 use App\Database\DbConnection;
 
 $conn = DbConnection::getInstance()->getConnection();
@@ -9,21 +10,21 @@ $conn = DbConnection::getInstance()->getConnection();
 #---------------------------------------------------------------------------
 
 // SQL-Befehl zum Erstellen der Datenbank
-$sql = "CREATE DATABASE $database";
+//$sql = "CREATE DATABASE $database";
 
 // Check
-if ($conn->query($sql) === TRUE) {
-    echo "Datenbank erfolgreich erstellt";
-} else {
-    echo "Fehler beim Erstellen der Datenbank: " . $conn->error;
-}
+// if ($conn->query($sql) === TRUE) {
+//     echo "Datenbank erfolgreich erstellt";
+// } else {
+//     echo "Fehler beim Erstellen der Datenbank: " . $conn->error;
+// }
 
 // Datenbank auswählen
-if ($conn->select_db($database)) {
-    echo "Datenbank erfolgreich ausgewählt: $database";
-} else {
-    echo "Fehler beim Auswählen der Datenbank: " . $conn->error;
-}
+// if ($conn->select_db($database)) {
+//     echo "Datenbank erfolgreich ausgewählt: $database";
+// } else {
+//     echo "Fehler beim Auswählen der Datenbank: " . $conn->error;
+// }
 
 #---------------------------------------------------------------------------
 #						Erstelle Schlagworte-Tabelle

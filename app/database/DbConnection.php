@@ -10,11 +10,11 @@ class DbConnection
     public static $servername = "localhost";
     public static $username = "root";
     public static $password = "";
-    public static $database = "WEB42"; // Datenbankname
+    public static $database = "web42"; // Datenbankname
 
     private function __construct()
     {
-        $this->conn = new \mysqli($this->servername, $this->username, $this->password, $this->database);
+        $this->conn = new \mysqli(self::$servername, self::$username, self::$password, self::$database);
 
         if ($this->conn->connect_error) {
             die("Verbindung fehlgeschlagen: " . $this->conn->connect_error);
