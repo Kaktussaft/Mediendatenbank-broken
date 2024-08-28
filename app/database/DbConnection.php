@@ -10,7 +10,7 @@ class DbConnection
     public static $servername = "localhost";
     public static $username = "root";
     public static $password = "";
-    public static $database = "web42"; // Datenbankname
+    public static $database = "Mediendatenbank"; // Datenbankname
 
     private function __construct()
     {
