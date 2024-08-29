@@ -5,15 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyMediaSpace</title>
-    <script type="text/javascript" src="../app/View/script/SharedScripts.js"></script>
-    <!-- Stylesheets for live website 
-    <link rel="stylesheet" href="../app/View/style/Layout.css">
-    <link rel="stylesheet" href="../app/View/style/PopUps.css">
-    -->
-    <!-- Stylesheets for testing -->
-    <link rel="stylesheet" href="style/Layout.css">
-    <link rel="stylesheet" href="style/PopUps.css">
-    
+    <script type="text/javascript" src="/Mediendatenbank/app/View/script/SharedScripts.js"></script>
+    <link rel="stylesheet" href="/Mediendatenbank/app/View/style/LandingPage.css">
+    <link rel="stylesheet" href="/Mediendatenbank/app/View/style/PopUps.css">    
 
 </head>
 
@@ -25,11 +19,15 @@
 
     <div class="loginForm">
         <form id="loginForm" action="UserController/login/" method="POST" onsubmit="updateFormLoginAction()">
-            <input type="text" id="username" name="username" placeholder="Username" required><br>
+            <div class="userTextBox">
+                <input type="text" id="username" name="username" placeholder="Username" required><br>
+            </div>
             <input type="submit" value="Login" class="loginButton">
             <input type="hidden" name="Routing" value="login">
         </form>
-        <p>Noch keinen Login?<br>Registriere dich <a href="#" id="open-registration-modal">hier.</a></p>
+        <div class="registrationMessage">
+            <p>Noch keinen Login?<br>Registriere dich <a href="#" id="open-registration-modal">hier.</a></p>
+        </div>
     </div>
 
     <div id="registrationModal" class="modal">
