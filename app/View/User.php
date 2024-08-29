@@ -14,7 +14,6 @@
 <body>
     <div class="view">
         <h1>Userview</h1>
-        asdfasdf
     </div>    
 
     <div class="modifyAccountAndLogout">
