@@ -94,10 +94,6 @@
     </div>
 
     <script>
-        initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal');
-        initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');
-        initModal('modifyLabelModal', 'open-modifylabel-modal', 'close-modifylabel-modal');
-
         document.addEventListener('DOMContentLoaded', function() {
             initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal');
             initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');

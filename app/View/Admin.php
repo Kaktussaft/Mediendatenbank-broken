@@ -50,7 +50,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-           // initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal')
+            initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal')
 
             document.getElementById('toggle-user-view').addEventListener('click', function(event) {
                 event.preventDefault();
