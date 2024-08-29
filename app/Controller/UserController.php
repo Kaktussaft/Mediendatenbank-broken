@@ -38,7 +38,7 @@ class UserController extends Controller
         if (!$userExists) {
             $currentDateTime = new DateTime();
             list($name, $surname, $username, $email) = $this->sanitizeUserInput($name, $surname, $username, $email);
-            $user = new UserModel($name, $surname, $username, $currentDateTime, false, $email);
+            $user = new UserModel($name, $surname, $username, $currentDateTime, "false", $email);
             $this->userRepository->createUser($user);
             header('Location: http://localhost/Mediendatenbank/public/');
         } else {
