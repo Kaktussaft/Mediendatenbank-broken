@@ -1,19 +1,30 @@
 html, body {
     height: 100%; /* Stellen sicher, dass der gesamte Viewport abgedeckt wird */
-    margin-bottom: 50px;
+    background-color: #35343d;
+    background-image: url(../../../Design/Background.jpg);
+    background-size: cover;
+    background-position: center;
+    /*background-repeat: no-repeat;*/
+
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     justify-content: center; /* Zentriert horizontal */
-    align-items: center; /* Zentriert vertikal */
+    align-content: center;
+    place-items: center;  /*Zentriert vertikal */
     height: 100vh; /* Nimmt die gesamte Höhe des Viewports ein */
+}
+
+.welcomeMessage{
+    font-family: monospace;
+    margin-bottom: 30px;
+    color: white;
 }
 
 .loginForm{
     border-radius: 25px;
-    border: 2px solid #02BFBF;
+    border: 5px solid #02BFBF;
     padding: 20px;
     min-width: 100px; /* Startgröße */
     max-width: 30%; /* Wächst bis zur vollen Breite des Containers */
@@ -25,38 +36,36 @@ body {
     align-items: center;
 }
 
+.userTextBox{
+    margin-bottom: 20px;
+    margin-top: 15px;
+
+}
+
 .loginForm form{
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: stretch; /* Zentriert den Button und das Textfeld horizontal */
-    gap: 10px; /* Abstand zwischen dem Textfeld und dem Button */ 
-    margin: auto;
 }
 
-.loginForm p{
-    padding: 20px;    
+.registrationMessage{
+    /*padding: 20px;    */
     text-align: center;
-    margin: auto;
+    margin-bottom: 15px;
 }
 
 .loginButton{
     background-color: white;
     border-radius: 25px;
     border: 2px solid #02BFBF;
-    padding: 10px;
+    padding: 15px;
     font-weight: bold;
 }
 
 
 
-
-
 /*Fonts*/
-h1{
-    font-family: monospace
-}
-
 *{
     font-family: Arial, Helvetica, sans-serif;
 }

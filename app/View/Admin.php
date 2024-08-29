@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <script type="text/javascript" src="../app/View/script/SharedScripts.js"></script>
-    <link rel="stylesheet" href="../app/View/style/PopUps.css">
+    <script type="text/javascript" src="/Mediendatenbank/app/View/script/SharedScripts.js"></script>
+    <link rel="stylesheet" href="/Mediendatenbank/app/View/style/PopUps.css">
+    <link rel="stylesheet" href="/Mediendatenbank/app/View/style/AdminPage.css">
 </head>
 
 <body>
@@ -49,7 +50,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-           // initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal')
+            initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal')
 
             document.getElementById('toggle-user-view').addEventListener('click', function(event) {
                 event.preventDefault();
