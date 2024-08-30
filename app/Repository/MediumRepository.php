@@ -47,9 +47,16 @@ class MediumRepository
 
     public function deleteMedium(int $id, string $type) {}
     public function readMedium(int $id, string $type) {}
-    public function updatePhoto($photo) {}
-    public function updateVideo($video) {}
-    public function updateAudioBook($audioBook) {}
-    public  function updateEbook($ebook) {}
-    public function readAllMedia() {}
+    
+    public function updateMedium($medium){
+        
+    }
+
+    public function readAllMedia() {
+        $stmt = $this->conn->prepare("SELECT * FROM Fotos UNION SELECT * FROM Videos UNION SELECT * FROM Hörbücher UNION SELECT * FROM Ebooks");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
 }

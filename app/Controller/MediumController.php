@@ -87,7 +87,7 @@ class MediumController extends Controller
                 break;
             case 'video':
                
-                break;
+                break;   
             case 'audiobook':
                
                 break;
