@@ -66,6 +66,37 @@ class MediumController extends Controller
         }
     }
 
+    public function getAllMediums()
+    {
+        try {
+            $media = $this->mediumRepository->readAllMedia();
+            echo json_encode(['status' => 'success', 'data' => $media]);
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateMedium($newMedium, $oldMedium)
+    {
+
+        //implement parsing the data
+        $fileType = $oldMedium['Typ']; //assuming that is the sent over format from the frontend
+        switch ($fileType) {
+            case 'photo':
+                
+                break;
+            case 'video':
+               
+                break;
+            case 'audiobook':
+               
+                break;
+            case 'ebook':
+               
+                break;
+        }
+    }
+
     private function determineMediaType($fileName)
     {
         $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
@@ -107,4 +138,5 @@ class MediumController extends Controller
                 throw new Exception('Invalid media type.');
         }
     }
+
 }
