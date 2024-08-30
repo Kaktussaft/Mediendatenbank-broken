@@ -63,16 +63,18 @@ if ($conn->query($sql) === TRUE) {
 #						Erstelle Ebooks-Tabelle
 #---------------------------------------------------------------------------
 
-$sql = "CREATE TABLE Ebooks 
-(ebook_ID int auto_increment primary key, 
-Titel varchar(30) not null, 
-Beschreibung varchar(50), 
-Typ varchar(10) not null, 
-Dateigröße varchar(20) not null, 
-Hochlade_datum date not null, 
-Autor varchar(30), 
-Seitenzahl int, Benutzer_ID int not null, 
-foreign key(Benutzer_ID) References Benutzer(Benutzer_ID))";
+$sql = "CREATE TABLE Ebooks (
+    ebook_ID int auto_increment primary key, 
+    Titel varchar(30) not null, 
+    Dateipfad varchar(50), 
+    Typ varchar(10) not null, 
+    Dateigröße varchar(20) not null, 
+    Hochlade_datum date not null, 
+    Autor varchar(30), 
+    Seitenzahl int, 
+    Benutzer_ID int not null, 
+    foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)
+)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tabelle erfolgreich erstellt";
@@ -84,15 +86,18 @@ if ($conn->query($sql) === TRUE) {
 #						Erstelle Hörbücher-Tabelle
 #---------------------------------------------------------------------------
 
-$sql = "CREATE TABLE Hörbücher 
-(Hörbuch_ID int auto_increment primary key, 
-Titel varchar(30) not null, 
-Beschreibung varchar(50), Typ varchar(10) not null, 
-Dateigröße varchar(20) not null, 
-Hochlade_datum date not null, 
-Sprecher varchar(30), 
-Dauer time, Benutzer_ID int not null, 
-foreign key(Benutzer_ID) References Benutzer(Benutzer_ID))";
+$sql = "CREATE TABLE Hörbücher (
+    Hörbuch_ID int auto_increment primary key, 
+    Titel varchar(30) not null, 
+    Dateipfad varchar(50), 
+    Typ varchar(10) not null, 
+    Dateigröße varchar(20) not null, 
+    Hochlade_datum date not null, 
+    Sprecher varchar(30), 
+    Dauer time, 
+    Benutzer_ID int not null, 
+    foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)
+)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tabelle erfolgreich erstellt";
@@ -104,15 +109,18 @@ if ($conn->query($sql) === TRUE) {
 #						Erstelle Videos-Tabelle
 #---------------------------------------------------------------------------
 
-$sql = "CREATE TABLE Videos (Video_ID int auto_increment primary key, 
-Titel varchar(30) not null, 
-Beschreibung varchar(50), 
-Typ varchar(10) not null, 
-Dateigröße varchar(20) not null, 
-Hochlade_datum date not null, 
-Auslösung varchar(10), Dauer time, 
-Benutzer_ID int not null, 
-foreign key(Benutzer_ID) References Benutzer(Benutzer_ID))";
+$sql = "CREATE TABLE Videos (
+    Video_ID int auto_increment primary key, 
+    Titel varchar(30) not null, 
+    Dateipfad varchar(50), 
+    Typ varchar(10) not null, 
+    Dateigröße varchar(20) not null, 
+    Hochlade_datum date not null, 
+    Auflösung varchar(10), 
+    Dauer time, 
+    Benutzer_ID int not null, 
+    foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)
+)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tabelle erfolgreich erstellt";
@@ -124,13 +132,17 @@ if ($conn->query($sql) === TRUE) {
 #						Erstelle Fotos-Tabelle
 #---------------------------------------------------------------------------
 
-$sql = "CREATE TABLE Fotos 
-(Foto_ID int auto_increment primary key, 
-Titel varchar(30) not null, Beschreibung varchar(50), 
-Typ varchar(10) not null, Dateigröße varchar(20) not null, 
-Hochlade_datum date not null, Auslösung varchar(10), 
-Benutzer_ID int not null, 
-foreign key(Benutzer_ID) References Benutzer(Benutzer_ID))";
+$sql = "CREATE TABLE Fotos (
+    Foto_ID int auto_increment primary key, 
+    Titel varchar(30) not null, 
+    Dateipfad varchar(50), 
+    Typ varchar(10) not null, 
+    Dateigröße varchar(20) not null, 
+    Hochlade_datum date not null,
+    Auflösung varchar(10), 
+    Benutzer_ID int not null, 
+    foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)
+)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tabelle erfolgreich erstellt";
