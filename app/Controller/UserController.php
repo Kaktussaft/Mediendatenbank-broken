@@ -11,6 +11,7 @@ use DateTime;
 class UserController extends Controller
 {
     private $currentUser;
+    private $isAdmin;
     private $userRepository;
 
     public function __construct()
@@ -26,9 +27,9 @@ class UserController extends Controller
             header('Location: http://localhost/Mediendatenbank/public/');
             exit();
         } else {
-            $getUser = $this->userRepository->getUserByUsername($username);
-            $this->currentUser = $getUser;
-            $this->view('User', ['username' => $username]);
+            $this ->currentUser = $this->userRepository->getUserByUsername($username);
+            $this ->isAdmin = $this-> currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+            $this->view('User', ['isAdmin' => $this->isAdmin]);
         }
     }
 
@@ -50,19 +51,15 @@ class UserController extends Controller
     public function toggleAdminView()
     {
         $this->view('Admin');
-        // if($this->currentUser->isAmdmin())
-        // {
-        // $this->view('Admin', ['username' => $username]);
-        // }
-        // else
-        // {
 
-        //     //tell user he is not allowed to view this page
-        // }
     }
     public function toggleUserView()
     {
-        $this->view('User');
+        if($this->currentUser == null) {
+            header('Location: http://localhost/Mediendatenbank/public/');
+            exit();
+        }
+        $this->view('User', ['isAdmin' => $this->isAdmin]);
     }
 
     public function logout()

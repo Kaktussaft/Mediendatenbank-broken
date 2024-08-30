@@ -1,3 +1,6 @@
+<?php
+$isAdmin = $data['isAdmin'];
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -19,7 +22,9 @@
     <div class="modifyAccountAndLogout">
         <a href="#" id="open-accountModification-modal">Konto</a>
         <a href="#" id="logout">Logout</a>
+        <?php if ($isAdmin == "true"): ?>
         <a href="#" id="toggle-admin-view">Adminview</a>
+    <?php endif; ?>
     </div>
     <div class="uploadButton">
         <button id="open-upload-modal">Neu...</button>
