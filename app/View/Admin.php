@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <script type="text/javascript" src="/Mediendatenbank/app/View/script/SharedScripts.js"></script>
+    <script type="text/javascript" src="/Mediendatenbank/app/view/script/SharedScripts.js"></script>
     <link rel="stylesheet" href="/Mediendatenbank/app/View/style/PopUps.css">
     <link rel="stylesheet" href="/Mediendatenbank/app/View/style/AdminPage.css">
 </head>
@@ -15,7 +15,7 @@
     <div class="modifyAccountAndLogout">
         <a href="#" id="toggle-user-view">-> Userview</a>
         <a href="#" id="open-accountModification-modal">Konto</a>
-        <a href="#" id="logout">Logout</a>
+        <a href="" onclick="routeLogout(event)">Logout</a>
     </div>
     <div class="navigationpanel">
         <button onclick="test2('hier wird navigiert')">Dashboard</button>
@@ -58,11 +58,6 @@
                 window.location.reload();
             });
 
-            document.getElementById('logout').addEventListener('click', function(event) {
-                event.preventDefault();
-                history.replaceState(null, '', '/Mediendatenbank/public/UserController/logout/');
-                window.location.reload();
-            });
         });
     </script>
 </body>

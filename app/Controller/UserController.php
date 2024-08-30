@@ -10,12 +10,11 @@ use DateTime;
 
 class UserController extends Controller
 {
-    private $currentUser;
-    private $isAdmin;
     private $userRepository;
 
     public function __construct()
     {
+        session_start();
         $this->userRepository = new UserRepository();
     }
 
@@ -27,13 +26,15 @@ class UserController extends Controller
             header('Location: http://localhost/Mediendatenbank/public/');
             exit();
         } else {
-            $this ->currentUser = $this->userRepository->getUserByUsername($username);
-            $this ->isAdmin = $this-> currentUser['Rolle'] === 'admin' ? 'true' : 'false';
-            $this->view('User', ['isAdmin' => $this->isAdmin]);
+            $currentUser = $this->userRepository->getUserByUsername($username);
+            $_SESSION['currentUser'] = $currentUser;
+            $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+            $this->view('User', ['isAdmin' => $isAdmin]);
         }
     }
 
-    public function register(string $name, string $surname, string $username, string $email) {
+    public function register(string $name, string $surname, string $username, string $email)
+    {
         $userExists = $this->userRepository->readUserByUsername($username);
 
         if (!$userExists) {
@@ -51,21 +52,23 @@ class UserController extends Controller
     public function toggleAdminView()
     {
         $this->view('Admin');
-
     }
     public function toggleUserView()
     {
-        if($this->currentUser == null) {
+        if (!isset($_SESSION['currentUser'])) {
             header('Location: http://localhost/Mediendatenbank/public/');
             exit();
         }
-        $this->view('User', ['isAdmin' => $this->isAdmin]);
+        $currentUser = $_SESSION['currentUser'];
+        $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+        $this->view('User', ['isAdmin' => $isAdmin]);
     }
 
     public function logout()
     {
+        $_SESSION = [];
+        session_destroy();
         header('Location: http://localhost/Mediendatenbank/public/');
-        $currentUser = null;
         exit();
     }
 }

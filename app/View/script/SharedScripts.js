@@ -19,5 +19,11 @@ function initModal(modalId, openButtonId, closeButtonId){
         if (event.target === modal) {
             modal.style.display = 'none'; // Versteckt das Modal
         }
-    });
+    });   
+}
+    function routeLogout(event) {
+        event.preventDefault();
+        console.log('Logout clicked');
+        window.location.href = '/Mediendatenbank/public/UserController/logout/';
+    
 }
