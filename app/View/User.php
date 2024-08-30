@@ -17,16 +17,15 @@ $isAdmin = $data['isAdmin'];
 <body>
     <div class="view">
         <h1>Userview</h1>
-    </div>    
+    </div>
 
     <div class="modifyAccountAndLogout">
         <a href="#" id="open-accountModification-modal">Konto</a>
+        <div id="statusMessage"></div>
         <a href="" onclick="routeLogout(event)">Logout</a>
-
         <?php if ($isAdmin == "true"): ?>
-        <a href="#" id="toggle-admin-view">Adminview</a>
-    <?php endif; ?>
-    
+            <a href="#" id="toggle-admin-view">Adminview</a>
+        <?php endif; ?>
     </div>
     <div class="uploadButton">
         <button id="open-upload-modal">Neu...</button>
@@ -76,7 +75,7 @@ $isAdmin = $data['isAdmin'];
                 <label for="firstname">Vorname:</label>
                 <input type="text" id="firstname" name="firstname" required>
                 <br><br>
-                <button type="submit">Abschicken</button>
+                <button type="button" onclick="updateUserNonAdmin()">Abschicken</button>
             </form>
         </div>
     </div>
@@ -112,7 +111,6 @@ $isAdmin = $data['isAdmin'];
                 window.location.reload();
             });
 
-            
         });
     </script>
 </body>

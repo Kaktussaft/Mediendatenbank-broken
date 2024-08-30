@@ -24,7 +24,7 @@ class UserController extends Controller
 
         if (!$userExists) {
             header('Location: http://localhost/Mediendatenbank/public/');
-            exit();
+            echo 'User does not exist';
         } else {
             $currentUser = $this->userRepository->getUserByUsername($username);
             $_SESSION['currentUser'] = $currentUser;
@@ -48,6 +48,36 @@ class UserController extends Controller
             exit();
         }
     }
+    public function updateUser()
+    {
+        $rawData = file_get_contents('php://input');
+        $data = json_decode($rawData, true);
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $newUsername = isset($data['username']) ? $data['username'] : '';
+            $newEmail = isset($data['email']) ? $data['email'] : '';
+            $newSurname = isset($data['lastname']) ? $data['lastname'] : '';
+            $newName = isset($data['firstname']) ? $data['firstname'] : '';
+
+            list($username, $email, $surname, $name) = $this->sanitizeUserInput($newUsername, $newEmail, $newSurname, $newName);
+
+            $currentUser = $_SESSION['currentUser'];
+            $userExists = $this->userRepository->readUserByUsername($username);
+            $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+
+            if ($userExists) {
+                echo json_encode(['statusMessage' => 'duplicate', 'message' => 'Nutzername bereits vergeben']);
+               
+            } else {
+                echo json_encode(['statusMessage' => 'success', 'message' => 'Nutzer erfolgreich aktualisiert']);
+                $this->userRepository->updateUser($username, $email, $surname, $name, $isAdmin, $currentUser['Benutzername']);
+            }
+            
+        } else {
+            echo json_encode(['statusMessage' => 'error', 'message' => 'Invalid JSON data']);
+        }
+    }
+
 
     public function toggleAdminView()
     {

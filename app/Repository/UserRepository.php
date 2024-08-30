@@ -54,7 +54,12 @@ class UserRepository
         $stmt->close();
         return $user;
     }
-    public function updateUser($user) {
+    public function updateUser($username, $email, $surname, $name, $isAdmin, $previousUsername)
+    {
+        $stmt = $this->conn->prepare("UPDATE Benutzer SET Benutzername = ?, EMail = ?, Nachname = ?, Vorname = ?, Rolle = ? WHERE Benutzername = ?");
+        $stmt->bind_param("sssss", $username, $email, $surname, $name, $isAdmin, $previousUsername);
+        $stmt->execute();
+        $stmt->close();
         
     }
 }
