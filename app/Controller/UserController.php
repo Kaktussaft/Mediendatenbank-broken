@@ -69,8 +69,8 @@ class UserController extends Controller
                 echo json_encode(['statusMessage' => 'duplicate', 'message' => 'Nutzername bereits vergeben']);
                
             } else {
-                echo json_encode(['statusMessage' => 'success', 'message' => 'Nutzer erfolgreich aktualisiert']);
                 $this->userRepository->updateUser($username, $email, $surname, $name, $isAdmin, $currentUser['Benutzername']);
+                echo json_encode(['statusMessage' => 'success', 'message' => 'Nutzer erfolgreich aktualisiert']);
             }
             
         } else {
