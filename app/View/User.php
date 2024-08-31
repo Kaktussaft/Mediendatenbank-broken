@@ -13,44 +13,62 @@
 
 <body>
     <div class="view">
-        <h1>Userview</h1>
-    </div>    
+        <img src="/Mediendatenbank/Design/rakete.png" alt="" width="150px" height="150px">
+        <span>Userview</span>
+    </div>   
+    
+    <hr>
 
     <div class="modifyAccountAndLogout">
+        <a href="#" id="toggle-admin-view">Adminview</a>
         <a href="#" id="open-accountModification-modal">Konto</a>
         <a href="#" id="logout">Logout</a>
-        <a href="#" id="toggle-admin-view">Adminview</a>
     </div>
-    <div class="uploadButton">
-        <button id="open-upload-modal">Neu...</button>
+    <div class="upAndNav">
+        <div class="uploadButton">
+            <input type="image" id="open-upload-modal" src="/Mediendatenbank/Design/Upload-Button-Engine-style.png" alt="Neu..." width="150px" height="150px">
+        </div>
+        <div class="navigationPanel">
+            <button onclick="test2('hier wird navigiert')" class="navButton">Alle Medien</button>
+            <button onclick="test2('hier wird navigiert')" class="navButton">Fotos</button>
+            <button onclick="test2('hier wird navigiert')" class="navButton">Videos</button>
+            <button onclick="test2('hier wird navigiert')" class="navButton">E-Books</button>
+            <button onclick="test2('hier wird navigiert')" class="navButton">Hörbücher</button>
+        </div>
     </div>
-    <div class="navigationpanel">
-        <button onclick="test2('hier wird navigiert')">Alle Medien</button>
-        <button onclick="test2('hier wird navigiert')">Fotos</button>
-        <button onclick="test2('hier wird navigiert')">Videos</button>
-        <button onclick="test2('hier wird navigiert')">E-Books</button>
-        <button onclick="test2('hier wird navigiert')">Hörbücher</button>
+    <div class="content">
+        <div class="sortAndFilter">
+            <div class="sorting">
+                <form onchange="script/SortResults.js" class="sortingForm">
+                    <div class="sortSelection">
+                        <select name="sortingcriteria" id="sortingcriteria" class="sortCriteria">
+                            <option selected>Name</option>
+                            <option>Erstellungsdatum</option>
+                            <option>Größe</option>
+                        </select>
+                    </div>    
+                    <div class="sortRadios">
+                        <input type="radio" name="sortingorder" value="up" checked>aufsteigend<br>
+                        <input type="radio" name="sortingorder" value="down">absteigend
+                    </div>
+                </form>
+            </div>
+            <div class="labelling">
+                <div class="labelList"></div>
+                    <form action="">
+                        <!-- ToDo: Dynamisches Auflisten der Labels -->
+                    </form>
+                <div class="modifyLabels">
+                    <button id="open-modifylabel-modal" class="modifyLabelButton">Schlagwörter bearbeiten...</button>
+                </div>
+            </div>
+        </div>
+        <div class="contentArea">
+            Hier kommt der Content hin
+        </div>
     </div>
-    <div class="sorting">
-        <form onchange="script/SortResults.js">
-            <select name="sortingcriteria" id="sortingcriteria">
-                <option selected>Name</option>
-                <option>Erstellungsdatum</option>
-                <option>Größe</option>
-            </select>
-            <input type="radio" name="sortingorder" value="up" checked>aufsteigend
-            <input type="radio" name="sortingorder" value="down">absteigend
-        </form>
-    </div>
-    <div class="labelling">
-        <form action="">
-            <!-- ToDo: Dynamisches Auflisten der Labels -->
-        </form>
-        <button id="open-modifylabel-modal">Schlagwörter bearbeiten...</button>
-    </div>
-    <div class="contentArea">
-        Hier kommt der Content hin
-    </div>
+    
+    
 
     <div id="accountModificationModal" class="modal">
         <div class="modal-content">
