@@ -1,0 +1,85 @@
+html, body {
+    height: 100%;
+    background-color: #35343d;
+    background-image: url(../../../Design/Background.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.view{
+    display: flex;
+    align-items: center;
+    padding-left: calc(5% - 50px);
+    padding-right: calc(5% + 50px);
+}
+
+.view span{
+    font-weight: bold;
+    font-size: 25pt;
+    padding-left: 20px;
+}
+
+.toggleViewAndLogout{
+    position: fixed;
+    top: 40px;
+    left: calc(100% - 310px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 300px;
+    font-weight: bold;
+    font-size: 15pt;
+}
+
+.toggleViewAndLogout a{
+    text-decoration: none;
+}
+
+.upAndNav{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+.navigationPanel{
+    padding: 20px;
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigationPanel > button{
+    flex: 1;
+    background-color: #02BFBF;
+    border: 2px solid #02BFBF;
+    padding: 20px;
+    font-weight: bold;
+    color: white;
+    width: 40%;
+    margin: 20px;
+    font-size: 15pt;
+}
+
+.contentArea{
+    display: flex;
+    border: 2px solid #02BFBF;
+    margin-left: 20px;
+    margin-top: 20px;
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+    min-height: calc(100vh - 400px);
+}
+
+hr{
+    color: #02BFBF;
+}
+
+/*Fonts*/
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}

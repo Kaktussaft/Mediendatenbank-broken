@@ -13,16 +13,21 @@
 
 <body>
     <div class="view">
-        <img src="/Mediendatenbank/Design/rakete.png" alt="" width="150px" height="150px">
-        <span>Userview</span>
+        <img src="/Mediendatenbank/Design/rakete.png" alt="" width="100px" height="100px">
+        <span>UP - <br>Space</span>
     </div>   
     
     <hr>
 
     <div class="modifyAccountAndLogout">
-        <a href="#" id="toggle-admin-view">Adminview</a>
-        <a href="#" id="open-accountModification-modal">Konto</a>
-        <a href="#" id="logout">Logout</a>
+        <div class="linkSet">
+            <a href="#" id="toggle-admin-view">Adminview</a>
+            <a href="#" id="open-accountModification-modal">Konto</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+        <div class="searchBar">
+            <input type="text" id ="searchBar" placeholder="Suche...">
+        </div>
     </div>
     <div class="upAndNav">
         <div class="uploadButton">
@@ -126,6 +131,11 @@
                 event.preventDefault();
                 history.replaceState(null, '', '/Mediendatenbank/public/UserController/logout/');
                 window.location.reload();
+            });
+            document.getElementById('searchBar').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    // logik für Suche
+                }
             });
         });
     </script>

@@ -50,15 +50,14 @@ class UserController extends Controller
     public function toggleAdminView()
     {
         $this->view('Admin');
-        // if($this->currentUser->isAmdmin())
-        // {
-        // $this->view('Admin', ['username' => $username]);
-        // }
-        // else
-        // {
-
+        if($this->currentUser->isAmdmin())
+        {
+        $this->view('Admin', ['username' => $username]);
+        }
+        else
+        {
         //     //tell user he is not allowed to view this page
-        // }
+        }
     }
     public function toggleUserView()
     {

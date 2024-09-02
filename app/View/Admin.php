@@ -11,19 +11,46 @@
 </head>
 
 <body>
-    <h1>Adminview</h1>
-    <div class="modifyAccountAndLogout">
+    <div class="view">
+        <img src="/Mediendatenbank/Design/rakete.png" alt="" width="100px" height="100px">
+        <span>ADMIN - <br>Space</span>
+    </div>   
+    
+    <hr>
+
+    <div class="toogleViewAndLogout">
         <a href="#" id="toggle-user-view">-> Userview</a>
-        <a href="#" id="open-accountModification-modal">Konto</a>
         <a href="#" id="logout">Logout</a>
     </div>
-    <div class="navigationpanel">
+    <div class="navigationPanel">
         <button onclick="test2('hier wird navigiert')">Dashboard</button>
         <button onclick="test2('hier wird navigiert')">Nutzerverwaltung</button>
-        <button onclick="test2('hier wird navigiert')">Schlagwortverwaltung</button>
+        <!--- <button onclick="test2('hier wird navigiert')">Schlagwortverwaltung</button> --->
     </div>
     <div class="contentArea">
         Hier kommt der Content hin
+    </div>
+
+    <div id="accountModificationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-accountCreation-modal">&times;</span>
+            <h2>Konto hinzufügen</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <label for="email">E-Mail:</label>
+                <input type="text" id="email" name="email" required>
+                <br>
+                <label for="lastname">Nachname:</label>
+                <input type="text" id="lastname" name="lastname" required>
+                <br>
+                <label for="firstname">Vorname:</label>
+                <input type="text" id="firstname" name="firstname" required>
+                <br><br>
+                <button type="submit">Erstellen</button>
+            </form>
+        </div>
     </div>
 
     <div id="accountModificationModal" class="modal">
