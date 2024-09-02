@@ -1,3 +1,6 @@
+<?php
+$isAdmin = $data['isAdmin'];
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -5,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
-    <script type="text/javascript" src="/Mediendatenbank/app/View/script/SharedScripts.js"></script>
+    <script type="text/javascript" src="/Mediendatenbank/app/view/script/SharedScripts.js"></script>
     <link rel="stylesheet" href="/Mediendatenbank/app/View/style/PopUps.css">
     <link rel="stylesheet" href="/Mediendatenbank/app/View/style/UserPage.css">
 
@@ -92,7 +95,7 @@
                 <label for="firstname">Vorname:</label>
                 <input type="text" id="firstname" name="firstname" required>
                 <br><br>
-                <button type="submit">Abschicken</button>
+                <button type="button" onclick="updateUserNonAdmin()">Abschicken</button>
             </form>
         </div>
     </div>

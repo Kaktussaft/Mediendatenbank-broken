@@ -10,11 +10,11 @@ use DateTime;
 
 class UserController extends Controller
 {
-    private $currentUser;
     private $userRepository;
 
     public function __construct()
     {
+        session_start();
         $this->userRepository = new UserRepository();
     }
 
@@ -24,21 +24,23 @@ class UserController extends Controller
 
         if (!$userExists) {
             header('Location: http://localhost/Mediendatenbank/public/');
-            exit();
+            echo 'User does not exist';
         } else {
-            $getUser = $this->userRepository->getUserByUsername($username);
-            $this->currentUser = $getUser;
-            $this->view('User', ['username' => $username]);
+            $currentUser = $this->userRepository->getUserByUsername($username);
+            $_SESSION['currentUser'] = $currentUser;
+            $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+            $this->view('User', ['isAdmin' => $isAdmin]);
         }
     }
 
-    public function register(string $name, string $surname, string $username, string $email) {
+    public function register(string $name, string $surname, string $username, string $email)
+    {
         $userExists = $this->userRepository->readUserByUsername($username);
 
         if (!$userExists) {
             $currentDateTime = new DateTime();
             list($name, $surname, $username, $email) = $this->sanitizeUserInput($name, $surname, $username, $email);
-            $user = new UserModel($name, $surname, $username, $currentDateTime, false, $email);
+            $user = new UserModel($name, $surname, $username, $currentDateTime, "false", $email);
             $this->userRepository->createUser($user);
             header('Location: http://localhost/Mediendatenbank/public/');
         } else {
@@ -46,28 +48,92 @@ class UserController extends Controller
             exit();
         }
     }
-
+   
     public function toggleAdminView()
     {
         $this->view('Admin');
-        if($this->currentUser->isAmdmin())
-        {
-        $this->view('Admin', ['username' => $username]);
-        }
-        else
-        {
-        //     //tell user he is not allowed to view this page
-        }
     }
     public function toggleUserView()
     {
-        $this->view('User');
+        if (!isset($_SESSION['currentUser'])) {
+            header('Location: http://localhost/Mediendatenbank/public/');
+            exit();
+        }
+        $currentUser = $_SESSION['currentUser'];
+        $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+        $this->view('User', ['isAdmin' => $isAdmin]);
     }
 
     public function logout()
     {
+        $_SESSION = [];
+        session_destroy();
         header('Location: http://localhost/Mediendatenbank/public/');
-        $currentUser = null;
         exit();
+    }
+
+    public function updateUser()
+    {
+        $rawData = file_get_contents('php://input');
+        $data = json_decode($rawData, true);
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $newUsername = isset($data['username']) ? $data['username'] : '';
+            $newEmail = isset($data['email']) ? $data['email'] : '';
+            $newSurname = isset($data['lastname']) ? $data['lastname'] : '';
+            $newName = isset($data['firstname']) ? $data['firstname'] : '';
+
+            list($username, $email, $surname, $name) = $this->sanitizeUserInput($newUsername, $newEmail, $newSurname, $newName);
+
+            $currentUser = $_SESSION['currentUser'];
+            $userExists = $this->userRepository->readUserByUsername($username);
+            $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+
+            if ($userExists) {
+                echo json_encode(['statusMessage' => 'duplicate', 'message' => 'Nutzername bereits vergeben']);
+               
+            } else {
+                $this->userRepository->updateUser($username, $email, $surname, $name, $isAdmin, $currentUser['Benutzername']);
+                echo json_encode(['statusMessage' => 'success', 'message' => 'Nutzer erfolgreich aktualisiert']);
+            }
+            
+        } else {
+            echo json_encode(['statusMessage' => 'error', 'message' => 'Invalid JSON data']);
+        }
+    }
+
+    public function updateUserAdmin()
+    {
+        $rawData = file_get_contents('php://input');
+        $data = json_decode($rawData, true);
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $newUsername = isset($data['username']) ? $data['username'] : '';
+            $oldUsername = isset($data['oldUsername']) ? $data['oldUsername'] : ''; 
+            $newEmail = isset($data['email']) ? $data['email'] : '';
+            $newSurname = isset($data['lastname']) ? $data['lastname'] : '';
+            $newName = isset($data['firstname']) ? $data['firstname'] : '';
+            $newAdmin = isset($data['isAdmin']) ? $data['isAdmin'] : '';
+
+            list($username, $email, $surname, $name, $isAdmin) = $this->sanitizeUserInput($newUsername, $newEmail, $newSurname, $newName, $newAdmin);
+
+            $userExists = $this->userRepository->readUserByUsername($username);
+
+            if ($userExists) {
+                echo json_encode(['statusMessage' => 'duplicate', 'message' => 'Nutzername bereits vergeben']);
+               
+            } else {
+                $this->userRepository->updateUser($username, $email, $surname, $name, $isAdmin, $oldUsername);
+                echo json_encode(['statusMessage' => 'success', 'message' => 'Nutzer erfolgreich aktualisiert']);
+            }
+            
+        } else {
+            echo json_encode(['statusMessage' => 'error', 'message' => 'Invalid JSON data']);
+        }
+    }
+    public function getAllUsers()
+    {
+        $users = $this->userRepository->readAllUsers();
+        echo json_encode($users);
     }
 }

@@ -1,4 +1,4 @@
-function initModal(modalId, openButtonId, closeButtonId){
+function initModal(modalId, openButtonId, closeButtonId) {
     const modal = document.getElementById(modalId);
     const openModalLink = document.getElementById(openButtonId);
     const closeModalButton = document.getElementById(closeButtonId);
@@ -21,3 +21,47 @@ function initModal(modalId, openButtonId, closeButtonId){
         }
     });
 }
+function routeLogout(event) {
+    event.preventDefault();
+    console.log('Logout clicked');
+    window.location.href = '/Mediendatenbank/public/UserController/logout/';
+
+}
+
+function updateUserNonAdmin() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const lastname = document.getElementById('lastname').value;
+    const firstname = document.getElementById('firstname').value;
+
+    fetch('http://localhost/Mediendatenbank/public/UserController/updateUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: name,
+            email: email,
+            lastname: lastname,
+            firstname: firstname
+        })
+    })
+    .then(response => response.json())
+        .then(data => {
+            const statusMessage = document.getElementById('statusMessage');
+            if (data.status === 'success') {
+                statusMessage.textContent = data.message;
+                statusMessage.style.color = 'green';
+            } else {
+                statusMessage.textContent = data.message;
+                statusMessage.style.color = 'red';
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.textContent = 'Ein Fehler ist aufgetreten.';
+            statusMessage.style.color = 'red';
+        });
+}
+

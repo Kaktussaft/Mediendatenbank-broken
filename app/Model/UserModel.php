@@ -11,10 +11,10 @@ class UserModel
     private string $surname;
     private string $username;
     private DateTime $registrationDate;
-    private bool $isAdmin;
+    private string $isAdmin;
     private string $email; 
     
-    public function __construct(string $name, string $surname, string $username, DateTime $registrationDate, bool $isAdmin,   string $email)
+    public function __construct(string $name, string $surname, string $username, DateTime $registrationDate, string  $isAdmin,   string $email)
     {
         $this->name = $name;
         $this->surname = $surname;
@@ -64,11 +64,11 @@ class UserModel
         $this->registrationDate = $registrationDate;
     }
 
-    public function getIsAdmin(): bool {
+    public function getIsAdmin(): string {
         return $this->isAdmin;
     }
 
-    public function setIsAdmin(bool $isAdmin): void {
+    public function setIsAdmin(string $isAdmin): void {
         $this->isAdmin = $isAdmin;
     }
 

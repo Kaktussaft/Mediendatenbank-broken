@@ -22,7 +22,7 @@ class UserRepository
         $surname = $user->getSurname();
         $name = $user->getName();
         $isAdmin = $user->getIsAdmin();
-        $registrationDate = $user->getRegistrationDate()->format('Y-m-d'); // Format as date
+        $registrationDate = $user->getRegistrationDate()->format('Y-m-d');
 
         $stmt = $this->conn->prepare("INSERT INTO Benutzer (Benutzername, EMail, Nachname, Vorname, Rolle, Registrierungsdatum) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $username, $email, $surname, $name, $isAdmin, $registrationDate);
@@ -54,7 +54,21 @@ class UserRepository
         $stmt->close();
         return $user;
     }
-    public function updateUser($user) {
-        
+    public function updateUser($username, $email, $surname, $name, $isAdmin, $previousUsername)
+    {
+        $stmt = $this->conn->prepare("UPDATE Benutzer SET Benutzername = ?, EMail = ?, Nachname = ?, Vorname = ?, Rolle = ? WHERE Benutzername = ?");
+        $stmt->bind_param("ssssss", $username, $email, $surname, $name, $isAdmin, $previousUsername);
+        $stmt->execute();
+        $stmt->close();  
+    }
+
+    public function readAllUsers()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM Benutzer");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $users;
     }
 }

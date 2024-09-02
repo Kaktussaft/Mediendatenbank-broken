@@ -4,16 +4,22 @@ namespace App\Repository;
 
 class KeywordRepository{
 
-    public static function createKeyword($keyword){
+    public function createKeyword($keyword){
 
     }
-    public static function deleteKeyword(int $id){
+    public function deleteKeyword(int $id){
 
     }
-    public static function readKeyword(int $id){
+    public function readKeyword(int $id){
 
     }
-    public static function updateKeyword($keyword){
+    public function readAllKeywords(){
+
+    }
+    public function updateKeyword($keyword){
+
+    }
+    public function connectKeywordToMedia($keyword, $media){
 
     }
 
