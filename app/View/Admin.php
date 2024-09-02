@@ -18,26 +18,27 @@
     
     <hr>
 
-    <div class="toogleViewAndLogout">
-        <a href="#" id="toggle-user-view">-> Userview</a>
+    <div class="toggleViewAndLogout">
+        <a href="#" id="toggle-user-view">Userview</a>
         <a href="#" id="logout">Logout</a>
     </div>
+    
     <div class="navigationPanel">
         <button onclick="test2('hier wird navigiert')">Dashboard</button>
-        <button onclick="test2('hier wird navigiert')">Nutzerverwaltung</button>
+        <button id="open-accountModification-modal">Nutzerverwaltung</button>
         <!--- <button onclick="test2('hier wird navigiert')">Schlagwortverwaltung</button> --->
     </div>
     <div class="contentArea">
         Hier kommt der Content hin
     </div>
 
-    <div id="accountModificationModal" class="modal">
+    <div id="accountCreationModal" class="modal">
         <div class="modal-content">
             <span class="close" id="close-accountCreation-modal">&times;</span>
             <h2>Konto hinzufügen</h2>
             <form>
                 <label for="username">Username:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="username" name="username" required>
                 <br>
                 <label for="email">E-Mail:</label>
                 <input type="text" id="email" name="email" required>

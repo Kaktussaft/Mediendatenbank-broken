@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     background-color: #35343d;
-    background-image: url(../../../Design/Background.jpg);
+    background-image: url(/Mediendatenbank/Design/Background.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -20,54 +20,47 @@ html, body {
 }
 
 .toggleViewAndLogout{
-    position: fixed;
+    position: absolute;
     top: 40px;
-    left: calc(100% - 310px);
+    left: calc(100% - 210px);
     display: flex;
-    flex-direction: column;
     align-items: flex-end;
-    width: 300px;
-    font-weight: bold;
-    font-size: 15pt;
+    justify-content: flex-end;
+    width: 200px;
+    gap: 20px;
 }
 
 .toggleViewAndLogout a{
     text-decoration: none;
+    font-weight: bold;
+    font-size: 15pt;
 }
 
-.upAndNav{
+.navigationPanel {
+    padding: 20px;
+    width: calc(100% - 40px);
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    padding: 0;
-    width: 100%;
     height: fit-content;
 }
 
-.navigationPanel{
-    padding: 20px;
-    margin-left: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.navigationPanel > button{
+.navigationPanel > button {
     flex: 1;
     background-color: #02BFBF;
     border: 2px solid #02BFBF;
     padding: 20px;
     font-weight: bold;
     color: white;
-    width: 40%;
-    margin: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 15pt;
 }
 
 .contentArea{
     display: flex;
     border: 2px solid #02BFBF;
-    margin-left: 20px;
     margin-top: 20px;
     flex-grow: 1;
     background-color: rgba(0, 0, 0, 0.7);
@@ -75,7 +68,7 @@ html, body {
 }
 
 hr{
-    color: #02BFBF;
+    border-color: #02BFBF;
 }
 
 /*Fonts*/
