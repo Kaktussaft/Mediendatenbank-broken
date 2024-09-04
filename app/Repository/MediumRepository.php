@@ -52,11 +52,31 @@ class MediumRepository
         
     }
 
-    public function readAllMedia() {
-        $stmt = $this->conn->prepare("SELECT * FROM Fotos UNION SELECT * FROM Videos UNION SELECT * FROM Hörbücher UNION SELECT * FROM Ebooks");
+    public function readAllMedia($currentUserName) {
+        $stmt = $this->conn->prepare("SELECT * FROM Fotos WHERE Benutzername = ?");
+        $stmt->bind_param("s", $currentUserName);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $resultPhotos = $stmt->get_result();
         $stmt->close();
-        return $result;
+
+        $stmt = $this->conn->prepare("SELECT * FROM Videos WHERE Benutzername = ?");
+        $stmt->bind_param("s", $currentUserName);
+        $stmt->execute();
+        $resultVideos = $stmt->get_result();
+        $stmt->close();
+
+        $stmt = $this->conn->prepare("SELECT * FROM Hörbücher WHERE Benutzername = ?");
+        $stmt->bind_param("s", $currentUserName);
+        $stmt->execute();
+        $resultAudiobooks = $stmt->get_result();
+        $stmt->close();
+
+        $stmt = $this->conn->prepare("SELECT * FROM Ebooks WHERE Benutzername = ?");
+        $stmt->bind_param("s", $currentUserName);
+        $stmt->execute();
+        $resultEbooks = $stmt->get_result();
+        $stmt->close();
+
+        return [$resultPhotos, $resultVideos, $resultAudiobooks, $resultEbooks];
     }
 }
