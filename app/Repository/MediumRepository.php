@@ -13,34 +13,34 @@ class MediumRepository
         $this->conn = DbConnection::getInstance()->getConnection();
     }
 
-    public function createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $resolution, $uploadUser)
+    public function createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $resolution, $userId)
     {
         $stmt = $this->conn->prepare("INSERT INTO Fotos (Titel, Dateipfad, Typ, Dateigröße, Hochlade_datum, Auflösung, Benutzer_ID) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssi", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $resolution, $uploadUser);
+        $stmt->bind_param("ssssssi", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $resolution, $userId);
         $stmt->execute();
         $stmt->close();
     }
 
-    public function createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $resolution, $duration, $uploadUser)
+    public function createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $resolution, $duration, $userId)
     {
         $stmt = $this->conn->prepare("INSERT INTO Videos (Titel, Dateipfad, Typ, Dateigröße, Hochlade_datum, Auflösung, Dauer, Benutzer_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssssi", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $resolution, $duration, $uploadUser);
+        $stmt->bind_param("sssssssi", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $resolution, $duration, $userId);
         $stmt->execute();
         $stmt->close();
     }
 
-    public function createAudioBookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $speaker, $duration, $uploadUser)
+    public function createAudioBookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $speaker, $duration, $userId)
     {
         $stmt = $this->conn->prepare("INSERT INTO Hörbücher (Titel, Dateipfad, Typ, Dateigröße, Hochlade_datum, Sprecher, Dauer, Benutzer_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssssi", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $speaker, $duration, $uploadUser);
+        $stmt->bind_param("sssssssi", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $speaker, $duration, $userId);
         $stmt->execute();
         $stmt->close();
     }
 
-    public function createEbookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $author, $pages, $uploadUser)
+    public function createEbookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate,  $author, $pages, $userId)
     {
         $stmt = $this->conn->prepare("INSERT INTO Ebooks (Titel, Dateipfad, Typ, Dateigröße, Hochlade_datum, Autor, Seitenzahl, Benutzer_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssii", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $author, $pages, $uploadUser);
+        $stmt->bind_param("ssssssii", $fileName, $filePath, $fileType, $fileSize, $uploadDate, $author, $pages, $userId);
         $stmt->execute();
         $stmt->close();
     }
