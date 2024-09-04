@@ -20,12 +20,20 @@ class KeywordRepository{
         $stmt->execute();
         $stmt->close();
     }
-    public function deleteKeyword(int $id){
 
-    }
-    public function readKeyword(int $id){
+    public function deleteKeyword(int $keywordId){
+        $stmt = $this->conn->prepare("DELETE FROM Schlagwort_Medium WHERE Schlagwort_ID = ?");
+        $stmt->bind_param("i", $keywordId);
+        $stmt->execute();
+        $stmt->close();
 
+        $stmt = $this->conn->prepare("DELETE FROM Schlagworte WHERE Schlagwort_ID = ?");
+        $stmt->bind_param("i", $keywordId);
+        $stmt->execute();
+        $stmt->close();
     }
+
+
     public function readAllKeywordsWithAssociations($currentUserId){
         $keywords = [];
         
@@ -54,11 +62,12 @@ class KeywordRepository{
         return [$keywords, $associations];
     }
 
-    public function updateKeyword($keyword){
+    public function assignKeywordToMedia($keywordId, $mediaId){
 
-    }
-    public function connectKeywordToMedia($keyword, $media){
-
+        $stmt = $this->conn->prepare("INSERT INTO Schlagwort_Medium (Schlagwort_ID, Medium_ID) VALUES (?, ?)");
+        $stmt->bind_param("ss", $keywordId, $mediaId);
+        $stmt->execute();
+        $stmt->close();
     }
 
 }
