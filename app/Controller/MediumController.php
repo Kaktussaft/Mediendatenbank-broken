@@ -11,10 +11,12 @@ class MediumController extends Controller
 {
 
     private $mediumRepository;
+    private $currentUserId;
 
     public function __construct()
     {
         $this->mediumRepository = new MediumRepository();
+        $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
     }
 
     public function uploadFile()
@@ -37,8 +39,7 @@ class MediumController extends Controller
                     $uploadDir = $this->getUploadDirectory($fileType);
                     $uploadFile = $uploadDir . basename($file['name']);
                     $uploadDate =  (new DateTime())->format('Y-m-d');
-                    $currentUser = $_SESSION['currentUser'];
-                    $uploadUser = $currentUser['Benutzer_ID'];
+                  
 
                     if($file['error'] !== 0) {
                         throw new Exception('Error while uploading file: ' . $file['error']);
@@ -53,16 +54,16 @@ class MediumController extends Controller
 
                         switch ($fileType) {
                             case 'photo':
-                                $this->mediumRepository->createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', $uploadUser);
+                                $this->mediumRepository->createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', $this->currentUserId);
                                 break;
                             case 'video':
-                                $this->mediumRepository->createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $uploadUser);
+                                $this->mediumRepository->createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
                                 break;
                             case 'audiobook':
-                                $this->mediumRepository->createAudioBookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $uploadUser);
+                                $this->mediumRepository->createAudioBookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
                                 break;
                             case 'ebook':
-                                $this->mediumRepository->createEbookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $uploadUser);
+                                $this->mediumRepository->createEbookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
                                 break;
                         }
 

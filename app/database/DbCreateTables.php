@@ -54,7 +54,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE Schlagworte (
     Schlagwort_ID int auto_increment primary key, 
     Schlagwort_Name varchar(20) not null,
-   Benutzer_ID int not null, 
+    Benutzer_ID int not null, 
     foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)
 )";
 
