@@ -70,8 +70,8 @@ class MediumController extends Controller
     {
         try {
             $currrentUser = $_SESSION['user'];
-            $currentUserName = $currrentUser['Benutzername'];
-            $media = $this->mediumRepository->readAllMedia($currentUserName);
+            $currentUserId = $currrentUser['BenutzerId'];
+            $media = $this->mediumRepository->readAllMedia($currentUserId);
             echo json_encode(['status' => 'success', 'data' => $media]); //returns: Photos, Videos, Audiobooks, Ebooks in that order for current user
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);

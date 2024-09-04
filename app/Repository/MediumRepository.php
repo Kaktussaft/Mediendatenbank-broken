@@ -52,31 +52,19 @@ class MediumRepository
         
     }
 
-    public function readAllMedia($currentUserName) {
-        $stmt = $this->conn->prepare("SELECT * FROM Fotos WHERE Benutzername = ?");
-        $stmt->bind_param("s", $currentUserName);
-        $stmt->execute();
-        $resultPhotos = $stmt->get_result();
-        $stmt->close();
+    public function readAllMedia($currentUserId)
+{
+    $mediaTypes = ['Fotos', 'Videos', 'Hörbücher', 'Ebooks'];
+    $results = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM Videos WHERE Benutzername = ?");
-        $stmt->bind_param("s", $currentUserName);
+    foreach ($mediaTypes as $type) {
+        $stmt = $this->conn->prepare("SELECT * FROM $type WHERE Benutzer_ID = ?");
+        $stmt->bind_param("s", $currentUserId);
         $stmt->execute();
-        $resultVideos = $stmt->get_result();
+        $results[$type] = $stmt->get_result();
         $stmt->close();
-
-        $stmt = $this->conn->prepare("SELECT * FROM Hörbücher WHERE Benutzername = ?");
-        $stmt->bind_param("s", $currentUserName);
-        $stmt->execute();
-        $resultAudiobooks = $stmt->get_result();
-        $stmt->close();
-
-        $stmt = $this->conn->prepare("SELECT * FROM Ebooks WHERE Benutzername = ?");
-        $stmt->bind_param("s", $currentUserName);
-        $stmt->execute();
-        $resultEbooks = $stmt->get_result();
-        $stmt->close();
-
-        return [$resultPhotos, $resultVideos, $resultAudiobooks, $resultEbooks];
     }
+
+    return $results;
+}
 }
