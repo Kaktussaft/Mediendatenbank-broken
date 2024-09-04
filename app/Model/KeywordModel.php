@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model;
+
 class KeywordModel
 {
     public int $id;

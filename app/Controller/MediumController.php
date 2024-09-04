@@ -11,52 +11,67 @@ class MediumController extends Controller
 {
 
     private $mediumRepository;
+    private $currentUserId;
 
     public function __construct()
     {
         $this->mediumRepository = new MediumRepository();
+        $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
     }
 
     public function uploadFile()
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
-                $file = $_FILES['file'];
-                $fileType = $this->determineMediaType($file['name']);
-                $fileName = $file['name'];
-                $fileSize = $file['size'];
-                $uploadDir = $this->getUploadDirectory($fileType);
-                $uploadFile = $uploadDir . basename($file['name']);
-                $uploadDate =  (new DateTime())->format('Y-m-d');
-                $currentUser = $_SESSION['user'];
-                $uploadUser = $currentUser['Benutzer_ID'];
+                foreach ($_FILES['file']['name'] as $key => $name) {
 
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                }
+                    $file = [
+                        'name' => $_FILES['file']['name'][$key],
+                        'type' => $_FILES['file']['type'][$key],
+                        'tmp_name' => $_FILES['file']['tmp_name'][$key],
+                        'error' => $_FILES['file']['error'][$key],
+                        'size' => $_FILES['file']['size'][$key],
+                    ];
 
-                if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-                    $filePath = '/uploads/' . basename($file['name']);
+                    $fileType = $this->determineMediaType($file['name']);
+                    $fileName = $file['name'];
+                    $fileSize = $file['size'];
+                    $uploadDir = $this->getUploadDirectory($fileType);
+                    $uploadFile = $uploadDir . basename($file['name']);
+                    $uploadDate =  (new DateTime())->format('Y-m-d');
+                  
 
-                    switch ($fileType) {
-                        case 'photo':
-                            $this->mediumRepository->createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', $uploadUser);
-                            break;
-                        case 'video':
-                            $this->mediumRepository->createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $uploadUser);
-                            break;
-                        case 'audiobook':
-                            $this->mediumRepository->createAudioBookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $uploadUser);
-                            break;
-                        case 'ebook':
-                            $this->mediumRepository->createEbookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $uploadUser);
-                            break;
+                    if($file['error'] !== 0) {
+                        throw new Exception('Error while uploading file: ' . $file['error']);
                     }
 
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
 
-                    echo json_encode(['status' => 'success', 'message' => 'File erfolgreich hochgeladen.']);
-                } else {
-                    throw new Exception('Failed to move uploaded file.');
+                    if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
+                        $filePath = '/uploads/' . basename($file['name']);
+
+                        switch ($fileType) {
+                            case 'photo':
+                                $this->mediumRepository->createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', $this->currentUserId);
+                                break;
+                            case 'video':
+                                $this->mediumRepository->createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
+                                break;
+                            case 'audiobook':
+                                $this->mediumRepository->createAudioBookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
+                                break;
+                            case 'ebook':
+                                $this->mediumRepository->createEbookMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
+                                break;
+                        }
+
+
+                        echo json_encode(['status' => 'success', 'message' => 'File erfolgreich hochgeladen.']);
+                    } else {
+                        throw new Exception('Failed to move uploaded file.');
+                    }
                 }
             } else {
                 throw new Exception('Invalid request.');
@@ -66,11 +81,14 @@ class MediumController extends Controller
         }
     }
 
+
     public function getAllMediums()
     {
         try {
-            $media = $this->mediumRepository->readAllMedia();
-            echo json_encode(['status' => 'success', 'data' => $media]);
+            $currrentUser = $_SESSION['user'];
+            $currentUserId = $currrentUser['BenutzerId'];
+            $media = $this->mediumRepository->readAllMedia($currentUserId);
+            echo json_encode(['status' => 'success', 'data' => $media]); //returns: Photos, Videos, Audiobooks, Ebooks in that order for current user
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
@@ -83,16 +101,16 @@ class MediumController extends Controller
         $fileType = $oldMedium['Typ']; //assuming that is the sent over format from the frontend
         switch ($fileType) {
             case 'photo':
-                
+
                 break;
             case 'video':
-               
-                break;   
+
+                break;
             case 'audiobook':
-               
+
                 break;
             case 'ebook':
-               
+
                 break;
         }
     }
@@ -138,5 +156,4 @@ class MediumController extends Controller
                 throw new Exception('Invalid media type.');
         }
     }
-
 }
