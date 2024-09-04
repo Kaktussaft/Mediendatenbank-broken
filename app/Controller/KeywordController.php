@@ -22,4 +22,10 @@ class KeywordController extends Controller
         $keyword = new KeywordModel($keywordName);
         $this->keywordRepository->createKeyword($keyword, $this->currentUserId);
     }
+
+    public function getAllKeywordsAndAssociations()
+    {
+        $keywordsAndAssociations = $this->keywordRepository->readAllKeywordsWithAssociations($this->currentUserId);
+        echo json_encode(['status' => 'success', 'data' => $keywordsAndAssociations]);
+    }
 }
