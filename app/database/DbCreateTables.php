@@ -26,20 +26,7 @@ $conn = DbConnection::getInstance()->getConnection();
 //     echo "Fehler beim Auswählen der Datenbank: " . $conn->error;
 // }
 
-#---------------------------------------------------------------------------
-#						Erstelle Schlagworte-Tabelle
-#---------------------------------------------------------------------------
 
-$sql = "CREATE TABLE Schlagworte 
-(Schlagwort_ID int auto_increment primary key, 
-Schlagwort_Name varchar(20) not null),
-foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Tabelle erfolgreich erstellt";
-} else {
-    echo "Fehler beim Erstellen der Tabelle: " . $conn->error;
-}
 
 #---------------------------------------------------------------------------
 #						Erstelle Benutzer-Tabelle
@@ -53,6 +40,23 @@ Nachname varchar(30) not null,
 Vorname varchar(30) not null, 
 Rolle varchar(10) not null, 
 Registrierungsdatum date not null)";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Tabelle erfolgreich erstellt";
+} else {
+    echo "Fehler beim Erstellen der Tabelle: " . $conn->error;
+}
+
+#---------------------------------------------------------------------------
+#						Erstelle Schlagworte-Tabelle
+#---------------------------------------------------------------------------
+
+$sql = "CREATE TABLE Schlagworte (
+    Schlagwort_ID int auto_increment primary key, 
+    Schlagwort_Name varchar(20) not null,
+   Benutzer_ID int not null, 
+    foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)
+)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tabelle erfolgreich erstellt";
