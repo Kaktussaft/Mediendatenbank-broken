@@ -32,7 +32,8 @@ $conn = DbConnection::getInstance()->getConnection();
 
 $sql = "CREATE TABLE Schlagworte 
 (Schlagwort_ID int auto_increment primary key, 
-Schlagwort_Name varchar(20) not null)";
+Schlagwort_Name varchar(20) not null),
+foreign key (Benutzer_ID) references Benutzer(Benutzer_ID)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Tabelle erfolgreich erstellt";
