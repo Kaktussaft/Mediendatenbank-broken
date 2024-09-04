@@ -37,7 +37,7 @@ class MediumController extends Controller
                     $uploadDir = $this->getUploadDirectory($fileType);
                     $uploadFile = $uploadDir . basename($file['name']);
                     $uploadDate =  (new DateTime())->format('Y-m-d');
-                    $currentUser = $_SESSION['user'];
+                    $currentUser = $_SESSION['currentUser'];
                     $uploadUser = $currentUser['Benutzer_ID'];
 
                     if($file['error'] !== 0) {
