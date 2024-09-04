@@ -23,9 +23,18 @@ class KeywordController extends Controller
         $this->keywordRepository->createKeyword($keyword, $this->currentUserId);
     }
 
+    public function createAssociation(int $keywordId, int $mediumId)
+    {
+        $this->keywordRepository->assignKeywordToMedia($keywordId, $mediumId);
+    }
+
     public function getAllKeywordsAndAssociations()
     {
         $keywordsAndAssociations = $this->keywordRepository->readAllKeywordsWithAssociations($this->currentUserId);
         echo json_encode(['status' => 'success', 'data' => $keywordsAndAssociations]);
+    }
+    public function deleteKeyword(int $keywordId)
+    {
+        $this->keywordRepository->deleteKeyword($keywordId);
     }
 }
