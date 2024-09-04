@@ -37,11 +37,11 @@ $isAdmin = $data['isAdmin'];
             <input type="image" id="open-upload-modal" src="/Mediendatenbank/Design/Upload-Button-Engine-style.png" alt="Neu..." width="150px" height="150px">
         </div>
         <div class="navigationPanel">
-            <button onclick="test2('hier wird navigiert')" class="navButton">Alle Medien</button>
-            <button onclick="test2('hier wird navigiert')" class="navButton">Fotos</button>
-            <button onclick="test2('hier wird navigiert')" class="navButton">Videos</button>
-            <button onclick="test2('hier wird navigiert')" class="navButton">E-Books</button>
-            <button onclick="test2('hier wird navigiert')" class="navButton">Hörbücher</button>
+            <button id="navAllMedia" class="navButton">Alle Medien</button>
+            <button id="navPhotos" class="navButton">Fotos</button>
+            <button id="navVideos" class="navButton">Videos</button>
+            <button id="navEBooks" class="navButton">E-Books</button>
+            <button id="navAudioBooks" class="navButton">Hörbücher</button>
         </div>
     </div>
     <div class="content">
@@ -71,9 +71,7 @@ $isAdmin = $data['isAdmin'];
                 </div>
             </div>
         </div>
-        <div class="contentArea">
-            Hier kommt der Content hin
-        </div>
+        <div class="contentArea" id="contentArea"></div>
     </div>
     
     
@@ -104,7 +102,7 @@ $isAdmin = $data['isAdmin'];
         <div class="modal-content">
             <span class="close" id="close-upload-modal">&times;</span>
             <h2>Medien hochladen</h2>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
+            <form action="uploadFile()" method="post" enctype="multipart/form-data">
                 <p><input type="file" name="filefield[]" multiple="multiple"></p>
                 <p><input type="submit" value="Hochladen"></p>
             </form>
@@ -139,6 +137,21 @@ $isAdmin = $data['isAdmin'];
                 if (e.key === 'Enter') {
                     // logik für Suche
                 }
+            });
+            document.getElementById('navAllMedia').addEventListener('click', function(event){
+                ladeAndere();
+            });
+            document.getElementById('navPhotos').addEventListener('click', function(event){
+                ladeBilder();
+            });
+            document.getElementById('navVideos').addEventListener('click', function(event){
+                ladeAndere();
+            });
+            document.getElementById('navEBooks').addEventListener('click', function(event){
+                ladeAndere();
+            });
+            document.getElementById('navAudioBooks').addEventListener('click', function(event){
+                ladeAndere();
             });
         });
     </script>

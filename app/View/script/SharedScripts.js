@@ -65,3 +65,53 @@ function updateUserNonAdmin() {
         });
 }
 
+function ladeBilder() {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: name,
+            email: email,
+            lastname: lastname,
+            firstname: firstname
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            const bildContainer = document.getElementById('contentArea');
+            bildContainer.innerHTML = '';
+            data.forEach(bild => {
+                // Erstellen eines img-Elements für jedes Bild
+                const img = document.createElement('img');
+                img.src = bild.Dateipfad; // Pfad zum Bild aus der Datenbank
+                img.alt = bild.Titel; // Optionaler Alternativtext
+                bildContainer.appendChild(img); // Hinzufügen des Bildes zum Container
+            });
+        })
+        .catch(error => console.error('Fehler beim Laden der Bilder:', error));
+}
+
+function ladeAndere() {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: name,
+            email: email,
+            lastname: lastname,
+            firstname: firstname
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            const bildContainer = document.getElementById('contentArea');
+            bildContainer.innerHTML = '';
+            
+        })
+        .catch(error => console.error('Fehler beim Laden der Bilder:', error));
+}
+
