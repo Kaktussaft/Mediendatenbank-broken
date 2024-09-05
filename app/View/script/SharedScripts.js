@@ -65,8 +65,30 @@ function updateUserNonAdmin() {
         });
 }
 
+function ladeAlle(){
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: name,
+            email: email,
+            lastname: lastname,
+            firstname: firstname
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            const bildContainer = document.getElementById('contentArea');
+            bildContainer.innerHTML = '';
+            
+        })
+        .catch(error => console.error('Fehler beim Laden der Bilder:', error));
+}
+
 function ladeBilder() {
-    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums2', {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -94,7 +116,7 @@ function ladeBilder() {
 }
 
 function ladeAndere() {
-    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums2', {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

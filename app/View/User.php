@@ -139,7 +139,7 @@ $isAdmin = $data['isAdmin'];
                 }
             });
             document.getElementById('navAllMedia').addEventListener('click', function(event){
-                ladeAndere();
+                ladeAlle();
             });
             document.getElementById('navPhotos').addEventListener('click', function(event){
                 ladeBilder();
