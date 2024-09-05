@@ -18,18 +18,20 @@ $isAdmin = $data['isAdmin'];
     <div class="view">
         <img src="/Mediendatenbank/Design/rakete.png" alt="" width="100px" height="100px">
         <span>UP - <br>Space</span>
-    </div>   
-    
+    </div>
+
     <hr>
 
     <div class="modifyAccountAndLogout">
         <div class="linkSet">
-            <a href="#" id="toggle-admin-view">Adminview</a>
+            <a href="" onclick="routeLogout(event)">Logout</a>
             <a href="#" id="open-accountModification-modal">Konto</a>
-            <a href="#" id="logout">Logout</a>
+            <?php if ($isAdmin == "true"): ?>
+                <a href="#" id="toggle-admin-view">Adminview</a>
+            <?php endif; ?>
         </div>
         <div class="searchBar">
-            <input type="text" id ="searchBar" placeholder="Suche...">
+            <input type="text" id="searchBar" placeholder="Suche...">
         </div>
     </div>
     <div class="upAndNav">
@@ -54,7 +56,7 @@ $isAdmin = $data['isAdmin'];
                             <option>Erstellungsdatum</option>
                             <option>Größe</option>
                         </select>
-                    </div>    
+                    </div>
                     <div class="sortRadios">
                         <input type="radio" name="sortingorder" value="up" checked>aufsteigend<br>
                         <input type="radio" name="sortingorder" value="down">absteigend
@@ -63,9 +65,9 @@ $isAdmin = $data['isAdmin'];
             </div>
             <div class="labelling">
                 <div class="labelList"></div>
-                    <form action="">
-                        <!-- ToDo: Dynamisches Auflisten der Labels -->
-                    </form>
+                <form action="">
+                    <!-- ToDo: Dynamisches Auflisten der Labels -->
+                </form>
                 <div class="modifyLabels">
                     <button id="open-modifylabel-modal" class="modifyLabelButton">Schlagwörter bearbeiten...</button>
                 </div>
@@ -73,8 +75,8 @@ $isAdmin = $data['isAdmin'];
         </div>
         <div class="contentArea" id="contentArea"></div>
     </div>
-    
-    
+
+
 
     <div id="accountModificationModal" class="modal">
         <div class="modal-content">
@@ -138,19 +140,19 @@ $isAdmin = $data['isAdmin'];
                     // logik für Suche
                 }
             });
-            document.getElementById('navAllMedia').addEventListener('click', function(event){
+            document.getElementById('navAllMedia').addEventListener('click', function(event) {
                 ladeAlle();
             });
-            document.getElementById('navPhotos').addEventListener('click', function(event){
+            document.getElementById('navPhotos').addEventListener('click', function(event) {
                 ladeBilder();
             });
-            document.getElementById('navVideos').addEventListener('click', function(event){
+            document.getElementById('navVideos').addEventListener('click', function(event) {
                 ladeAndere();
             });
-            document.getElementById('navEBooks').addEventListener('click', function(event){
+            document.getElementById('navEBooks').addEventListener('click', function(event) {
                 ladeAndere();
             });
-            document.getElementById('navAudioBooks').addEventListener('click', function(event){
+            document.getElementById('navAudioBooks').addEventListener('click', function(event) {
                 ladeAndere();
             });
         });
