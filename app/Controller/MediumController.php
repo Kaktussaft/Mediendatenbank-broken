@@ -15,6 +15,7 @@ class MediumController extends Controller
 
     public function __construct()
     {
+        session_start();
         $this->mediumRepository = new MediumRepository();
         $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
     }

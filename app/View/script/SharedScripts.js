@@ -43,7 +43,7 @@ function updateUserNonAdmin() {
             username: name,
             email: email,
             lastname: lastname,
-            firstname: firstname
+            firstname: firstname,
         })
     })
     .then(response => response.json())

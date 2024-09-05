@@ -24,11 +24,11 @@ $isAdmin = $data['isAdmin'];
 
     <div class="modifyAccountAndLogout">
         <div class="linkSet">
-            <a href="" onclick="routeLogout(event)">Logout</a>
-            <a href="#" id="open-accountModification-modal">Konto</a>
             <?php if ($isAdmin == "true"): ?>
                 <a href="#" id="toggle-admin-view">Adminview</a>
             <?php endif; ?>
+            <a href="#" id="open-accountModification-modal">Konto</a>
+            <a href="" id="logout" onclick="routeLogout(event)">Logout</a>
         </div>
         <div class="searchBar">
             <input type="text" id="searchBar" placeholder="Suche...">
@@ -76,14 +76,12 @@ $isAdmin = $data['isAdmin'];
         <div class="contentArea" id="contentArea"></div>
     </div>
 
-
-
     <div id="accountModificationModal" class="modal">
         <div class="modal-content">
             <span class="close" id="close-accountModification-modal">&times;</span>
             <h2>Konto bearbeiten</h2>
-            <form>
-                <label for="username">Username:</label>
+            <form id="uploadForm" action="http://localhost/Mediendatenbank/public/UserController/updateUser" method="post" enctype="multipart/form-data" target="responseWindow">
+                <label for="name">Username:</label>
                 <input type="text" id="name" name="name" required>
                 <br>
                 <label for="email">E-Mail:</label>
@@ -95,7 +93,8 @@ $isAdmin = $data['isAdmin'];
                 <label for="firstname">Vorname:</label>
                 <input type="text" id="firstname" name="firstname" required>
                 <br><br>
-                <button type="button" onclick="updateUserNonAdmin()">Abschicken</button>
+                <input type="submit" value="Abschicken">
+                <iframe name="responseWindow" id="responseWindow" style="display:none;"></iframe>
             </form>
         </div>
     </div>
@@ -104,10 +103,11 @@ $isAdmin = $data['isAdmin'];
         <div class="modal-content">
             <span class="close" id="close-upload-modal">&times;</span>
             <h2>Medien hochladen</h2>
-            <form action="uploadFile()" method="post" enctype="multipart/form-data">
-                <p><input type="file" name="filefield[]" multiple="multiple"></p>
+            <form id="uploadForm" action="http://localhost/Mediendatenbank/public/MediumController/uploadFile" method="post" enctype="multipart/form-data" target="responseWindow">
+                <p><input type="file" id="fileInput" name="file[]" multiple="multiple"></p>
                 <p><input type="submit" value="Hochladen"></p>
             </form>
+            <iframe name="responseWindow" id="responseWindow" style="display:none;"></iframe>
         </div>
     </div>
 
@@ -125,6 +125,11 @@ $isAdmin = $data['isAdmin'];
             initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');
             initModal('modifyLabelModal', 'open-modifylabel-modal', 'close-modifylabel-modal');
 
+            const responseWindow = document.getElementById('responseWindow');
+            responseWindow.addEventListener('load', function(){
+                uploadModal.style.display = 'none';
+            });
+            
             document.getElementById('toggle-admin-view').addEventListener('click', function(event) {
                 event.preventDefault();
                 history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleAdminView/');
