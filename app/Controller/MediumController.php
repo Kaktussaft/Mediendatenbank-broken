@@ -15,9 +15,17 @@ class MediumController extends Controller
 
     public function __construct()
     {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_SESSION['currentUser']['Benutzer_ID'])) {
+            $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
+        } else {
+            throw new Exception("User is not logged in.");
+        }
+
         $this->mediumRepository = new MediumRepository();
-        $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
     }
 
     public function uploadFile()
@@ -49,6 +57,8 @@ class MediumController extends Controller
                     if (!is_dir($uploadDir)) {
                         mkdir($uploadDir, 0777, true);
                     }
+
+                    $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
 
                     if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
                         $filePath = '/uploads/' . basename($file['name']);
