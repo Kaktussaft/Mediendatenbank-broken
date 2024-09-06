@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Core\Controller;
 use App\Model\KeywordModel;
 use App\Repository\KeywordRepository;
+use Exception;
 
 class KeywordController extends Controller
 {
@@ -13,8 +14,16 @@ class KeywordController extends Controller
 
     public function __construct()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_SESSION['currentUser']['Benutzer_ID'])) {
+            $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
+        } else {
+            throw new Exception("User is not logged in.");
+        }
         $this->keywordRepository = new KeywordRepository();
-        $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
     }
 
     public function createKeyword(string $keywordName)

@@ -96,9 +96,7 @@ class MediumController extends Controller
     public function getAllMediums()
     {
         try {
-            $currrentUser = $_SESSION['user'];
-            $currentUserId = $currrentUser['BenutzerId'];
-            $media = $this->mediumRepository->readAllMedia($currentUserId);
+            $media = $this->mediumRepository->readAllMedia($this->currentUserId);
             echo json_encode(['status' => 'success', 'data' => $media]); //returns: Photos, Videos, Audiobooks, Ebooks in that order for current user
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
