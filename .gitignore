@@ -3,3 +3,4 @@
 phpinfo.php
 vendor/
 composer.lock
+.uploads/
