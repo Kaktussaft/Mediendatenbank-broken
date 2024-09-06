@@ -130,11 +130,7 @@ $isAdmin = $data['isAdmin'];
                 uploadModal.style.display = 'none';
             });
             
-            document.getElementById('toggle-admin-view').addEventListener('click', function(event) {
-                event.preventDefault();
-                history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleAdminView/');
-                window.location.reload();
-            });
+            
             document.getElementById('logout').addEventListener('click', function(event) {
                 event.preventDefault();
                 history.replaceState(null, '', '/Mediendatenbank/public/UserController/logout/');
@@ -159,6 +155,11 @@ $isAdmin = $data['isAdmin'];
             });
             document.getElementById('navAudioBooks').addEventListener('click', function(event) {
                 ladeAndere();
+            });
+            document.getElementById('toggle-admin-view').addEventListener('click', function(event) {
+                event.preventDefault();
+                history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleAdminView/');
+                window.location.reload();
             });
         });
     </script>

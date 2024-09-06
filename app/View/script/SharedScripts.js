@@ -70,18 +70,22 @@ function ladeAlle(){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: name,
-            email: email,
-            lastname: lastname,
-            firstname: firstname
-        })
+        }
     })
         .then(response => response.json())
         .then(data => {
-            const bildContainer = document.getElementById('contentArea');
-            bildContainer.innerHTML = '';
+            const contentArea = document.getElementById('contentArea');
+            const contentPath = '/Mediendatenbank/public';
+            contentArea.innerHTML = '';
+            Object.keys(data.data).forEach(type => {
+                const mediaTypeList = data.data[type];
+                mediaTypeList.forEach(medium => {
+                    const element = document.createElement('img');
+                    element.src = contentPath + medium.Dateipfad;  // Assuming 'Dateipfad' is the column for the file path
+                    element.alt = medium.Titel || 'Kein Titel';  // Optional alt text
+                    contentArea.appendChild(element);
+                })
+            });
             
         })
         .catch(error => console.error('Fehler beim Laden der Bilder:', error));
