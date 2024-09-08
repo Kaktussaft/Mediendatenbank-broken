@@ -41,18 +41,20 @@ class KeywordRepository{
         $stmt->bind_param("s", $currentUserId);
         $stmt->execute();
         $resultKeywords = $stmt->get_result();
-        $keywords = $resultKeywords->fetch_assoc();
 
+        while ($keyword = $resultKeywords->fetch_assoc()) {
+            $keywords[] = $keyword;
+        }
         $stmt->close();
 
         $associations = [];
-        $stm = $this->conn->prepare("SELECT * FROM Schlagwort_Medium WHERE Schlagwort_ID = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM SchlagwortMedien WHERE Schlagwort_ID = ?");
 
         while ($keyword = $resultKeywords->fetch_assoc()) {
             $keywordId = $keyword['Schlagwort_ID'];
-            $stm->bind_param("i", $keywordId);
-            $stm->execute();
-            $resultAssociations = $stm->get_result();
+            $stmt->bind_param("i", $keywordId);
+            $stmt->execute();
+            $resultAssociations = $stmt->get_result();
     
             while ($association = $resultAssociations->fetch_assoc()) {
                 $associations[] = $association;
