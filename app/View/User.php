@@ -63,13 +63,12 @@ $isAdmin = $data['isAdmin'];
                     </div>
                 </form>
             </div>
-            <div class="labelling">
-                <div class="labelList"></div>
+            <div class="keywording">
+                <div class="keyWordList" id="keyWordList"></div>
                 <form action="">
-                    <!-- ToDo: Dynamisches Auflisten der Labels -->
                 </form>
-                <div class="modifyLabels">
-                    <button id="open-modifylabel-modal" class="modifyLabelButton">Schlagwörter bearbeiten...</button>
+                <div class="modifyKeyWords">
+                    <button id="open-modifykeyword-modal" class="modifyKeyWordButton">Schlagwörter bearbeiten...</button>
                 </div>
             </div>
         </div>
@@ -111,11 +110,13 @@ $isAdmin = $data['isAdmin'];
         </div>
     </div>
 
-    <div id="modifyLabelModal" class="modal">
+    <div id="modifyKeyWordModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="close-modifylabel-modal">&times;</span>
+            <span class="close" id="close-modifykeyword-modal">&times;</span>
             <h2>Meine Schlagwörter bearbeiten</h2>
-            <p>Hier entsteht noch eine Logik fürs Bearbeiten der Schlagwörter.</p>
+            <div class="modifyKeyWordList">
+            </div>
+            
         </div>
     </div>
 
@@ -123,14 +124,21 @@ $isAdmin = $data['isAdmin'];
         document.addEventListener('DOMContentLoaded', function() {
             initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal');
             initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');
-            initModal('modifyLabelModal', 'open-modifylabel-modal', 'close-modifylabel-modal');
+            initModal('modifyKeyWordModal', 'open-modifykeyword-modal', 'close-modifykeyword-modal');
 
             const responseWindow = document.getElementById('responseWindow');
             responseWindow.addEventListener('load', function(){
                 uploadModal.style.display = 'none';
             });
             
-            
+            <?php if ($isAdmin == "true"): ?>
+            document.getElementById('toggle-admin-view').addEventListener('click', function(event) {
+                event.preventDefault();
+                history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleAdminView/');
+                window.location.reload();
+            });
+            <?php endif; ?>
+
             document.getElementById('logout').addEventListener('click', function(event) {
                 event.preventDefault();
                 history.replaceState(null, '', '/Mediendatenbank/public/UserController/logout/');
@@ -142,25 +150,23 @@ $isAdmin = $data['isAdmin'];
                 }
             });
             document.getElementById('navAllMedia').addEventListener('click', function(event) {
-                ladeAlle();
+                loadAll();
             });
             document.getElementById('navPhotos').addEventListener('click', function(event) {
-                ladeBilder();
+                loadPhotos();
             });
             document.getElementById('navVideos').addEventListener('click', function(event) {
-                ladeAndere();
+                // ladeAndere();
             });
             document.getElementById('navEBooks').addEventListener('click', function(event) {
-                ladeAndere();
+                // ladeAndere();
             });
             document.getElementById('navAudioBooks').addEventListener('click', function(event) {
-                ladeAndere();
+                // ladeAndere();
             });
-            document.getElementById('toggle-admin-view').addEventListener('click', function(event) {
-                event.preventDefault();
-                history.replaceState(null, '', '/Mediendatenbank/public/UserController/toggleAdminView/');
-                window.location.reload();
-            });
+            
+            loadKeyWords();
+
         });
     </script>
 </body>
