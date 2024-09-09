@@ -22,7 +22,7 @@ class KeywordRepository{
     }
 
     public function deleteKeyword(int $keywordId){
-        $stmt = $this->conn->prepare("DELETE FROM Schlagwort_Medium WHERE Schlagwort_ID = ?");
+        $stmt = $this->conn->prepare("DELETE FROM SchlagwortMedien WHERE Schlagwort_ID = ?");
         $stmt->bind_param("i", $keywordId);
         $stmt->execute();
         $stmt->close();
@@ -66,7 +66,7 @@ class KeywordRepository{
 
     public function assignKeywordToMedia($keywordId, $mediaId){
 
-        $stmt = $this->conn->prepare("INSERT INTO Schlagwort_Medium (Schlagwort_ID, Medium_ID) VALUES (?, ?)");
+        $stmt = $this->conn->prepare("INSERT INTO SchlagwortMedien (Schlagwort_ID, Medium_ID) VALUES (?, ?)");
         $stmt->bind_param("ss", $keywordId, $mediaId);
         $stmt->execute();
         $stmt->close();
