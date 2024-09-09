@@ -119,7 +119,7 @@ function loadPhotos() {
         .catch(error => console.error('Fehler beim Laden der Bilder:', error));
 }
 
-function loadKeyWords(){
+function loadKeyWords(keyWordElement, deletionButton){
     fetch('http://localhost/Mediendatenbank/public/KeywordController/getAllKeywordsAndAssociations', {
         method: 'POST',
         headers: {
@@ -130,7 +130,7 @@ function loadKeyWords(){
         .then(data => {
             if (data.status = 'success'){
                 const keyWords = data.data[0];
-                const keyWordList = document.getElementById("keyWordList");
+                const keyWordList = document.getElementById(keyWordElement);
 
                 keyWordList.innerHTML = '';
                 keyWords.forEach(keyword => {
@@ -145,6 +145,19 @@ function loadKeyWords(){
                     
                     keyWordList.appendChild(checkbox);
                     keyWordList.appendChild(label);
+                    
+                    if (deletionButton){
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Löschen';  // Set button text
+                        deleteButton.onclick = function() {
+                            deleteKeyword(keyword.Schlagwort_ID);
+                            loadKeyWords('keyWordList', false);
+                            loadKeyWords('modifyKeyWordList', true);
+                            loadKeyWords('keyWordSelection', false);
+                        };
+                        keyWordList.appendChild(deleteButton);
+                    }               
+                    
                     keyWordList.appendChild(document.createElement('br')); // Für Zeilenumbruch
                 });
             } else {
@@ -152,4 +165,44 @@ function loadKeyWords(){
             }            
         })
         .catch(error => console.error('Fehler beim Laden der Schlagworte:', error));
+}
+
+function createKeyWord(keyWordName) {
+    fetch('http://localhost/Mediendatenbank/public/KeywordController/createKeyword/' + keyWordName, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    //.then(response => response.json())
+    //.then(data => {
+    //    if (data.status === 'success') {
+    //        alert('Schlagwort erfolgreich erstellt.');
+    //        loadKeyWords('keyWordElement');  // Reload the list after deletion
+    //    } else {
+    //        alert('Fehler beim Anlegen des Schlagworts: ' + data.message);
+    //    }
+    //})
+    .catch(error => console.error('Fehler beim Anlegen des Schlagworts:', error));
+}
+
+function deleteKeyword(keywordId){
+    if (confirm("Möchten Sie dieses Schlagwort wirklich löschen?")) {
+        fetch('http://localhost/Mediendatenbank/public/KeywordController/deleteKeyword/' + keywordId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Schlagwort erfolgreich gelöscht.');
+                loadKeyWords('keyWordElement');  // Reload the list after deletion
+            } else {
+                alert('Fehler beim Löschen des Schlagworts: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Fehler beim Löschen des Schlagworts:', error));
+    }
 }

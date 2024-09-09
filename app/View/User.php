@@ -114,9 +114,30 @@ $isAdmin = $data['isAdmin'];
         <div class="modal-content">
             <span class="close" id="close-modifykeyword-modal">&times;</span>
             <h2>Meine Schlagwörter bearbeiten</h2>
-            <div class="modifyKeyWordList">
-            </div>
-            
+            <div class="modifyKeyWordList" id="modifyKeyWordList"></div>
+            <button id="open-modifySingleKeyWord-modal">Schlagwort bearbeiten</button><br>
+            <button id="open-newKeyWord-modal">Neues Schlagwort</button>
+        </div>
+    </div>
+
+    <div id="modifySingleKeyWordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modifySingleKeyWord-modal">&times;</span>
+            <h2>Schlagwort bearbeiten</h2>
+            <form id="keyWordModificationForm" action="http://localhost/Mediendatenbank/public/KeywordController/modifyKeyword" method="post" enctype="multipart/form-data">
+                <select name="keyWordSelection" id="keyWordSelection"></select><br>
+                <input type="text" id="keyWordName" name="keyWordName" placeholder="Neuen Namen eingeben" required><br>
+                <input type="submit" value="Absenden">
+            </form>
+        </div>
+    </div>
+
+    <div id="newKeyWordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-newKeyWord-modal">&times;</span>
+            <h2>Neues Schlagwort anlegen</h2>
+            <input type="text" name="createKeyWordName" id="createKeyWordName" placeholder="Bezeichnung">
+            <button id="createKeyWordButton">Anlegen</button>
         </div>
     </div>
 
@@ -125,6 +146,8 @@ $isAdmin = $data['isAdmin'];
             initModal('accountModificationModal', 'open-accountModification-modal', 'close-accountModification-modal');
             initModal('uploadModal', 'open-upload-modal', 'close-upload-modal');
             initModal('modifyKeyWordModal', 'open-modifykeyword-modal', 'close-modifykeyword-modal');
+            initModal('modifySingleKeyWordModal', 'open-modifySingleKeyWord-modal', 'close-modifySingleKeyWord-modal')
+            initModal('newKeyWordModal', 'open-newKeyWord-modal', 'close-newKeyWord-modal');
 
             const responseWindow = document.getElementById('responseWindow');
             responseWindow.addEventListener('load', function(){
@@ -164,8 +187,21 @@ $isAdmin = $data['isAdmin'];
             document.getElementById('navAudioBooks').addEventListener('click', function(event) {
                 // ladeAndere();
             });
+
+            document.getElementById('createKeyWordButton').addEventListener('click', function(event) {
+                const keyWordName = document.getElementById('createKeyWordName').value;
+                if (keyWordName != ""){
+                    createKeyWord(keyWordName);
+                    loadKeyWords('keyWordList', false);
+                    loadKeyWords('modifyKeyWordList', true);
+                    loadKeyWords('keyWordSelection', false);
+                }
+                
+            });
             
-            loadKeyWords();
+            loadKeyWords('keyWordList', false);
+            loadKeyWords('modifyKeyWordList', true);
+            loadKeyWords('keyWordSelection', false);
 
         });
     </script>
