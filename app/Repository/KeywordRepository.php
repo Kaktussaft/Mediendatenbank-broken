@@ -15,7 +15,7 @@ class KeywordRepository{
 
     public function createKeyword($keyword, $currentUserId){
         $keywordName = $keyword->getName();
-        $stmt = $this->conn->prepare("INSERT INTO Schlagworte (Name, Benutzer_ID) VALUES (?, ?)");
+        $stmt = $this->conn->prepare("INSERT INTO Schlagworte (Schlagwort_Name, Benutzer_ID) VALUES (?, ?)");
         $stmt->bind_param("ss", $keywordName, $currentUserId);
         $stmt->execute();
         $stmt->close();
