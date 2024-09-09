@@ -11,9 +11,11 @@ use DateTime;
 class UserController extends Controller
 {
     private $userRepository;
+    private $currentUser;
 
     public function __construct()
     {
+        session_start();
         $this->userRepository = new UserRepository();
     }
 
@@ -25,10 +27,9 @@ class UserController extends Controller
             header('Location: http://localhost/Mediendatenbank/public/');
             echo 'User does not exist';
         } else {
-            $currentUser = $this->userRepository->getUserByUsername($username);
-            session_start();
-            $_SESSION['currentUser'] = $currentUser;
-            $isAdmin = $currentUser['Rolle'] === 'admin' ? 'true' : 'false';
+            $this->currentUser = $this->userRepository->getUserByUsername($username);
+            $_SESSION['currentUser'] = $this->currentUser;
+            $isAdmin = $this->currentUser['Rolle'] === 'admin' ? 'true' : 'false';
             $this->view('User', ['isAdmin' => $isAdmin]);
         }
     }
