@@ -53,7 +53,7 @@ class MediumRepository
     }
 
     public function readAllMedia($currentUserId)
-{
+    {
     $mediaTypes = ['Fotos', 'Videos', 'Hörbücher', 'Ebooks'];
     $results = [];
 
@@ -61,7 +61,12 @@ class MediumRepository
         $stmt = $this->conn->prepare("SELECT * FROM $type WHERE Benutzer_ID = ?");
         $stmt->bind_param("s", $currentUserId);
         $stmt->execute();
-        $results[$type] = $stmt->get_result();
+        $result = $stmt->get_result();
+        $mediaData = [];
+        while ($row = $result->fetch_assoc()) {
+            $mediaData[] = $row;
+        }
+        $results[$type] = $mediaData;
         $stmt->close();
     }
 

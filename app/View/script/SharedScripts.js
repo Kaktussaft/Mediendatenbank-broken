@@ -65,29 +65,33 @@ function updateUserNonAdmin() {
         });
 }
 
-function ladeAlle(){
+function loadAll(){
     fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: name,
-            email: email,
-            lastname: lastname,
-            firstname: firstname
-        })
+        }
     })
         .then(response => response.json())
         .then(data => {
-            const bildContainer = document.getElementById('contentArea');
-            bildContainer.innerHTML = '';
+            const contentArea = document.getElementById('contentArea');
+            const contentPath = '/Mediendatenbank/public';
+            contentArea.innerHTML = '';
+            Object.keys(data.data).forEach(type => {
+                const mediaTypeList = data.data[type];
+                mediaTypeList.forEach(medium => {
+                    const element = document.createElement('img');
+                    element.src = contentPath + medium.Dateipfad;  // Assuming 'Dateipfad' is the column for the file path
+                    element.alt = medium.Titel || 'Kein Titel';  // Optional alt text
+                    contentArea.appendChild(element);
+                })
+            });
             
         })
         .catch(error => console.error('Fehler beim Laden der Bilder:', error));
 }
 
-function ladeBilder() {
+function loadPhotos() {
     fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
         method: 'POST',
         headers: {
@@ -115,25 +119,37 @@ function ladeBilder() {
         .catch(error => console.error('Fehler beim Laden der Bilder:', error));
 }
 
-function ladeAndere() {
-    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
+function loadKeyWords(){
+    fetch('http://localhost/Mediendatenbank/public/KeywordController/getAllKeywordsAndAssociations', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: name,
-            email: email,
-            lastname: lastname,
-            firstname: firstname
-        })
+        }
     })
         .then(response => response.json())
         .then(data => {
-            const bildContainer = document.getElementById('contentArea');
-            bildContainer.innerHTML = '';
-            
-        })
-        .catch(error => console.error('Fehler beim Laden der Bilder:', error));
-}
+            if (data.status = 'success'){
+                const keyWords = data.data[0];
+                const keyWordList = document.getElementById("keyWordList");
 
+                keyWordList.innerHTML = '';
+                keyWords.forEach(keyword => {
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'keywords[]';
+                    checkbox.value = keyword.Schlagwort_ID;
+    
+                    const label = document.createElement('label');
+                    const labelText = document.createTextNode(" " + keyword.Schlagwort_Name); // Nutze den Keyword Namen als Label
+                    label.appendChild(labelText);
+                    
+                    keyWordList.appendChild(checkbox);
+                    keyWordList.appendChild(label);
+                    keyWordList.appendChild(document.createElement('br')); // Für Zeilenumbruch
+                });
+            } else {
+                console.error('Fehler beim Laden der Schlagworte:', data.message);
+            }            
+        })
+        .catch(error => console.error('Fehler beim Laden der Schlagworte:', error));
+}
