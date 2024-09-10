@@ -21,6 +21,13 @@ class KeywordRepository{
         $stmt->close();
     }
 
+    public function updateKeywordName($keywordId, $keywordName){
+        $stmt = $this->conn->prepare("UPDATE Schlagworte SET Schlagwort_Name = ? WHERE Schlagwort_ID = ?");
+        $stmt->bind_param("si", $keywordName, $keywordId);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     public function deleteKeyword(int $keywordId){
         $stmt = $this->conn->prepare("DELETE FROM SchlagwortMedien WHERE Schlagwort_ID = ?");
         $stmt->bind_param("i", $keywordId);
@@ -67,6 +74,13 @@ class KeywordRepository{
     public function assignKeywordToMedia($keywordId, $mediaId){
 
         $stmt = $this->conn->prepare("INSERT INTO SchlagwortMedien (Schlagwort_ID, Medium_ID) VALUES (?, ?)");
+        $stmt->bind_param("ss", $keywordId, $mediaId);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function removeKeywordFromMedia($keywordId, $mediaId){
+        $stmt = $this->conn->prepare("DELETE FROM SchlagwortMedien WHERE Schlagwort_ID = ? AND Medium_ID = ?");
         $stmt->bind_param("ss", $keywordId, $mediaId);
         $stmt->execute();
         $stmt->close();
