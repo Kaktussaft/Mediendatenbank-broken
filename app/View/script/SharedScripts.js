@@ -119,7 +119,7 @@ function loadPhotos() {
         .catch(error => console.error('Fehler beim Laden der Bilder:', error));
 }
 
-function loadKeyWords(keyWordElement, deletionButton){
+function loadKeyWords(keyWordElement, listType, deletionButton){
     fetch('http://localhost/Mediendatenbank/public/KeywordController/getAllKeywordsAndAssociations', {
         method: 'POST',
         headers: {
@@ -131,40 +131,67 @@ function loadKeyWords(keyWordElement, deletionButton){
             if (data.status = 'success'){
                 const keyWords = data.data[0];
                 const keyWordList = document.getElementById(keyWordElement);
-
                 keyWordList.innerHTML = '';
-                keyWords.forEach(keyword => {
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.name = 'keywords[]';
-                    checkbox.value = keyword.Schlagwort_ID;
-    
-                    const label = document.createElement('label');
-                    const labelText = document.createTextNode(" " + keyword.Schlagwort_Name); // Nutze den Keyword Namen als Label
-                    label.appendChild(labelText);
-                    
-                    keyWordList.appendChild(checkbox);
-                    keyWordList.appendChild(label);
-                    
-                    if (deletionButton){
-                        const deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Löschen';  // Set button text
-                        deleteButton.onclick = function() {
-                            deleteKeyword(keyword.Schlagwort_ID);
-                            loadKeyWords('keyWordList', false);
-                            loadKeyWords('modifyKeyWordList', true);
-                            loadKeyWords('keyWordSelection', false);
-                        };
-                        keyWordList.appendChild(deleteButton);
-                    }               
-                    
-                    keyWordList.appendChild(document.createElement('br')); // Für Zeilenumbruch
-                });
+
+                switch (listType) {
+                    case "checkbox":
+                    keyWords.forEach(keyword => {
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.name = 'keywords[]';
+                        checkbox.value = keyword.Schlagwort_ID;
+        
+                        const label = document.createElement('label');
+                        const labelText = document.createTextNode(" " + keyword.Schlagwort_Name); // Nutze den Keyword Namen als Label
+                        label.appendChild(labelText);
+                        
+                        keyWordList.appendChild(checkbox);
+                        keyWordList.appendChild(label);
+                        
+                        if (deletionButton){
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Löschen';  // Set button text
+                            deleteButton.onclick = function() {
+                                deleteKeyword(keyword.Schlagwort_ID);
+                                refreshKeyWords();
+                            };
+                            keyWordList.appendChild(deleteButton);
+                        }               
+                        
+                        keyWordList.appendChild(document.createElement('br')); // Für Zeilenumbruch
+                    });
+                    break;
+
+                    case "select":
+                        const defaultOption = document.createElement('option');
+                        defaultOption.text = 'Bitte Schlagwort auswählen';
+                        defaultOption.value = '';
+                        keyWordList.appendChild(defaultOption);
+
+                        keyWords.forEach(keyword => {
+                            const option = document.createElement('option');
+                            option.value = keyword.Schlagwort_ID;
+                            option.text = keyword.Schlagwort_Name;
+                            keyWordList.appendChild(option);
+                        });
+                    break;
+
+                    default:
+                        console.error('Bitte Listentyp eintragen.');
+                }
+
+                
             } else {
                 console.error('Fehler beim Laden der Schlagworte:', data.message);
             }            
         })
         .catch(error => console.error('Fehler beim Laden der Schlagworte:', error));
+}
+
+function refreshKeyWords(){
+    loadKeyWords('keyWordList', 'checkbox', false);
+    loadKeyWords('modifyKeyWordList', 'checkbox', true);
+    loadKeyWords('keyWordSelection', 'select', false);
 }
 
 function createKeyWord(keyWordName) {
@@ -198,7 +225,6 @@ function deleteKeyword(keywordId){
         .then(data => {
             if (data.status === 'success') {
                 alert('Schlagwort erfolgreich gelöscht.');
-                loadKeyWords('keyWordElement');  // Reload the list after deletion
             } else {
                 alert('Fehler beim Löschen des Schlagworts: ' + data.message);
             }

@@ -192,16 +192,12 @@ $isAdmin = $data['isAdmin'];
                 const keyWordName = document.getElementById('createKeyWordName').value;
                 if (keyWordName != ""){
                     createKeyWord(keyWordName);
-                    loadKeyWords('keyWordList', false);
-                    loadKeyWords('modifyKeyWordList', true);
-                    loadKeyWords('keyWordSelection', false);
+                    refreshKeyWords();
                 }
                 
             });
             
-            loadKeyWords('keyWordList', false);
-            loadKeyWords('modifyKeyWordList', true);
-            loadKeyWords('keyWordSelection', false);
+            refreshKeyWords();
 
         });
     </script>
