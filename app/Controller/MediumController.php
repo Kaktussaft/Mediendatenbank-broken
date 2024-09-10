@@ -45,6 +45,7 @@ class MediumController extends Controller
                     $fileType = $this->determineMediaType($file['name']);
                     $fileName = $file['name'];
                     $fileSize = $file['size'];
+                    
                     $uploadDir = $this->getUploadDirectory($fileType);
                     $uploadFile = $uploadDir . basename($file['name']);
                     $uploadDate =  (new DateTime())->format('Y-m-d');
@@ -65,7 +66,9 @@ class MediumController extends Controller
 
                         switch ($fileType) {
                             case 'photo':
-                                $this->mediumRepository->createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', $this->currentUserId);
+                                list($width, $height) = getimagesize($file['tmp_name']);
+                                $fileResolution = $width . 'x' . $height;
+                                $this->mediumRepository->createPhotoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, $fileResolution, $this->currentUserId);
                                 break;
                             case 'video':
                                 $this->mediumRepository->createVideoMedium($fileName, $filePath, $fileType, $fileSize, $uploadDate, '', '', $this->currentUserId);
@@ -103,25 +106,21 @@ class MediumController extends Controller
         }
     }
 
-    public function updateMedium($newMedium, $oldMedium)
+    public function updateMediums($medium)
     {
+        foreach ($medium as $key => $value) {
+            $id = $value['ID'];
+            $fileType = $value['Typ'];
+            $title = $value['Titel'];
+            $resolution = $value['Auflösung'];
+            $duration = $value['Dauer'];
+            $speaker = $value['Sprecher'];
+            $author = $value['Autor'];
+            $pages = $value['Seitenzahl'];
 
-        //implement parsing the data
-        $fileType = $oldMedium['Typ']; //assuming that is the sent over format from the frontend
-        switch ($fileType) {
-            case 'photo':
-
-                break;
-            case 'video':
-
-                break;
-            case 'audiobook':
-
-                break;
-            case 'ebook':
-
-                break;
+            $this->mediumRepository->updateMedium($id, $fileType, $title, $resolution, $duration, $speaker, $author, $pages);
         }
+       
     }
 
     private function determineMediaType($fileName)
