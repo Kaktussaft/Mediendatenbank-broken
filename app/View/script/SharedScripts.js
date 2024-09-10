@@ -48,20 +48,10 @@ function updateUserNonAdmin() {
     })
     .then(response => response.json())
         .then(data => {
-            const statusMessage = document.getElementById('statusMessage');
-            if (data.status === 'success') {
-                statusMessage.textContent = data.message;
-                statusMessage.style.color = 'green';
-            } else {
-                statusMessage.textContent = data.message;
-                statusMessage.style.color = 'red';
-            }
+            alert(data.message);
         })
         .catch((error) => {
             console.error('Error:', error);
-            const statusMessage = document.getElementById('statusMessage');
-            statusMessage.textContent = 'Ein Fehler ist aufgetreten.';
-            statusMessage.style.color = 'red';
         });
 }
 

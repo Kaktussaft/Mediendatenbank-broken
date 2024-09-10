@@ -79,21 +79,20 @@ $isAdmin = $data['isAdmin'];
         <div class="modal-content">
             <span class="close" id="close-accountModification-modal">&times;</span>
             <h2>Konto bearbeiten</h2>
-            <form id="uploadForm" action="http://localhost/Mediendatenbank/public/UserController/updateUser" method="post" enctype="multipart/form-data" target="responseWindow">
+            <form id="modifyUserFrom">
                 <label for="name">Username:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name">
                 <br>
                 <label for="email">E-Mail:</label>
-                <input type="text" id="email" name="email" required>
+                <input type="text" id="email" name="email">
                 <br>
                 <label for="lastname">Nachname:</label>
-                <input type="text" id="lastname" name="lastname" required>
+                <input type="text" id="lastname" name="lastname">
                 <br>
                 <label for="firstname">Vorname:</label>
-                <input type="text" id="firstname" name="firstname" required>
+                <input type="text" id="firstname" name="firstname">
                 <br><br>
-                <input type="submit" value="Abschicken">
-                <iframe name="responseWindow" id="responseWindow" style="display:none;"></iframe>
+                <button id="modifyUserButton">Abschicken</button>
             </form>
         </div>
     </div>
@@ -195,6 +194,10 @@ $isAdmin = $data['isAdmin'];
                     refreshKeyWords();
                 }
                 
+            });
+
+            document.getElementById('modifyUserButton').addEventListener('click', function(event) {
+                updateUserNonAdmin();
             });
             
             refreshKeyWords();
