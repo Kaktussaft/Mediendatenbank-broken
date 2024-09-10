@@ -32,9 +32,19 @@ class KeywordController extends Controller
         $this->keywordRepository->createKeyword($keyword, $this->currentUserId);
     }
 
+    public function updateKeyword(int $keywordId, string $keywordName)
+    {
+        $this->keywordRepository->updateKeywordName($keywordId, $keywordName);
+    }
+
     public function createAssociation(int $keywordId, int $mediumId)
     {
         $this->keywordRepository->assignKeywordToMedia($keywordId, $mediumId);
+    }
+
+    public function deleteAssociation(int $keywordId, int $mediumId)
+    {
+        $this->keywordRepository->removeKeywordFromMedia($keywordId, $mediumId);
     }
 
     public function getAllKeywordsAndAssociations()
