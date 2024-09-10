@@ -48,8 +48,29 @@ class MediumRepository
     public function deleteMedium(int $id, string $type) {}
     public function readMedium(int $id, string $type) {}
     
-    public function updateMedium($medium){
-        
+    public function updateMedium(int $id, $fileType, $title, $resolution ='', $duration='', $speaker='', $author='', $pages='') {
+        switch($fileType){
+            case'photo';
+                $stmt = $this->conn->prepare("UPDATE Fotos SET Titel = ?,  Auflösung = ? WHERE ID = ?");
+                $stmt->bind_param("ssi", $title, $resolution, $id);
+                $stmt->execute();
+                $stmt->close();
+            case'video';
+                $stmt = $this-> conn->prepare("UPDATE Fotos SET Titel = ?, Auflösung = ?, Dauer = ? WHERE ID = ?");
+                $stmt->bind_param("sssi", $title, $resolution, $duration, $id);
+                $stmt->execute();
+                $stmt->close();
+            case'audiobook';
+                $stmt = $this-> conn->prepare("UPDATE Fotos SET Titel = ?, Sprecher = ?, Dauer = ? WHERE ID = ?");
+                $stmt->bind_param("sssi", $title, $speaker, $duration, $id);
+                $stmt->execute();
+                $stmt->close();
+            case'ebook';
+                $stmt = $this-> conn->prepare("UPDATE Fotos SET Titel = ?, Autor = ?, Seitenzahl = ? WHERE ID = ?");
+                $stmt->bind_param("ssii", $title, $author, $pages, $id);
+                $stmt->execute();
+                $stmt->close();
+        }        
     }
 
     public function readAllMedia($currentUserId)
