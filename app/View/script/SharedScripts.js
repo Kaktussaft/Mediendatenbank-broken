@@ -55,6 +55,58 @@ function updateUserNonAdmin() {
         });
 }
 
+function updateUserAdmin() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const lastname = document.getElementById('lastname').value;
+    const firstname = document.getElementById('firstname').value;
+    const updateUser = document.getElementById('accountSelection').value;
+    const isAdmin = document.querySelector('input[name="isAdmin"]:checked').value;
+
+    fetch('http://localhost/Mediendatenbank/public/UserController/updateUserAdmin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: name,
+            oldUsername: updateUser,
+            email: email,
+            lastname: lastname,
+            firstname: firstname,
+            isAdmin: isAdmin,
+        })
+    })
+    .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function deleteUser(){
+    const deleteUser = document.getElementById('accountSelection').value;
+
+    fetch('http://localhost/Mediendatenbank/public/UserController/deleteUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            deleteUser: deleteUser,
+        })
+    })
+    .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
 function loadAll(){
     fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
         method: 'POST',
@@ -221,4 +273,32 @@ function deleteKeyword(keywordId){
         })
         .catch(error => console.error('Fehler beim Löschen des Schlagworts:', error));
     }
+}
+
+function loadUsers(listId){
+    const userList = document.getElementById(listId);
+    fetch('http://localhost/Mediendatenbank/public/UserController/getAllUsers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const users = data;
+            
+            const defaultOption = document.createElement('option');
+            defaultOption.text = 'Bitte User auswählen';
+            defaultOption.value = '';
+            defaultOption.hidden = true;
+            userList.appendChild(defaultOption);
+
+            users.forEach(user => {
+                const option = document.createElement('option');
+                option.value = user.Benutzername;
+                option.text = user.Benutzername;
+                userList.appendChild(option);
+            });
+        
+        })
 }

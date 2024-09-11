@@ -67,6 +67,10 @@ html, body {
     min-height: calc(100vh - 400px);
 }
 
+button:hover{
+    cursor: pointer;
+}
+
 hr{
     border-color: #02BFBF;
 }

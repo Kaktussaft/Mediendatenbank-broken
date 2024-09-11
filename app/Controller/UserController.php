@@ -108,6 +108,8 @@ class UserController extends Controller
         $rawData = file_get_contents('php://input');
         $data = json_decode($rawData, true);
 
+        error_log(print_r($data, true));
+
         if (json_last_error() === JSON_ERROR_NONE) {
             $newUsername = isset($data['username']) ? $data['username'] : '';
             $oldUsername = isset($data['oldUsername']) ? $data['oldUsername'] : ''; 
@@ -116,15 +118,16 @@ class UserController extends Controller
             $newName = isset($data['firstname']) ? $data['firstname'] : '';
             $newAdmin = isset($data['isAdmin']) ? $data['isAdmin'] : '';
 
-            list($username, $email, $surname, $name, $isAdmin) = $this->sanitizeUserInput($newUsername, $newEmail, $newSurname, $newName, $newAdmin);
+
+            list($username, $email, $surname, $name) = $this->sanitizeUserInput($newUsername, $newEmail, $newSurname, $newName);
 
             $userExists = $this->userRepository->readUserByUsername($username);
 
-            if ($userExists) {
+            if ($userExists && $oldUsername != $username) {
                 echo json_encode(['statusMessage' => 'duplicate', 'message' => 'Nutzername bereits vergeben']);
                
             } else {
-                $this->userRepository->updateUser($username, $email, $surname, $name, $isAdmin, $oldUsername);
+                $this->userRepository->updateUser($username, $email, $surname, $name, $newAdmin, $oldUsername);
                 echo json_encode(['statusMessage' => 'success', 'message' => 'Nutzer erfolgreich aktualisiert']);
             }
             
