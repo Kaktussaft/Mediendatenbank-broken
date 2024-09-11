@@ -62,7 +62,7 @@ class MediumController extends Controller
                     $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
 
                     if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-                        $filePath = '/uploads/' . basename($file['name']);
+                        $filePath = '/uploads/' . $fileType . '/' . basename($file['name']);
 
                         switch ($fileType) {
                             case 'photo':
@@ -153,13 +153,13 @@ class MediumController extends Controller
     {
         switch ($fileType) {
             case 'photo':
-                return __DIR__ . '/../../public/uploads/photos/';
+                return __DIR__ . '/../../public/uploads/photo/';
             case 'video':
-                return __DIR__ . '/../../public/uploads/videos/';
+                return __DIR__ . '/../../public/uploads/video/';
             case 'audiobook':
                 return __DIR__ . '/../../public/uploads/audioBook/';
             case 'ebook':
-                return __DIR__ . '/../../public/uploads/ebooks/';
+                return __DIR__ . '/../../public/uploads/ebook/';
             default:
                 throw new Exception('Invalid media type.');
         }
