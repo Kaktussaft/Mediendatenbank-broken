@@ -71,4 +71,11 @@ class UserRepository
         $stmt->close();
         return $users;
     }
+    public function deleteUser($username)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM Benutzer WHERE Benutzername = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
