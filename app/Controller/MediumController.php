@@ -62,7 +62,7 @@ class MediumController extends Controller
                     $this->currentUserId = $_SESSION['currentUser']['Benutzer_ID'];
 
                     if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-                        $filePath = '/uploads/' . $fileType . '/' . basename($file['name']);
+                        $filePath = '/Mediendatenbank/public/uploads/' . $fileType . '/' . basename($file['name']);
 
                         switch ($fileType) {
                             case 'photo':
