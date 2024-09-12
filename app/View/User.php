@@ -178,13 +178,13 @@ $isAdmin = $data['isAdmin'];
                 loadPhotos();
             });
             document.getElementById('navVideos').addEventListener('click', function(event) {
-                // ladeAndere();
+                loadVideos();
             });
             document.getElementById('navEBooks').addEventListener('click', function(event) {
-                // ladeAndere();
+                loadEbooks();
             });
             document.getElementById('navAudioBooks').addEventListener('click', function(event) {
-                // ladeAndere();
+                loadAudioBooks();
             });
 
             document.getElementById('createKeyWordButton').addEventListener('click', function(event) {

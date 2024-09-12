@@ -117,13 +117,12 @@ function loadAll(){
         .then(response => response.json())
         .then(data => {
             const contentArea = document.getElementById('contentArea');
-            const contentPath = '/Mediendatenbank/public';
             contentArea.innerHTML = '';
             Object.keys(data.data).forEach(type => {
                 const mediaTypeList = data.data[type];
                 mediaTypeList.forEach(medium => {
                     const element = document.createElement('img');
-                    element.src = contentPath + medium.Dateipfad;  // Assuming 'Dateipfad' is the column for the file path
+                    element.src = medium.Dateipfad;  // Assuming 'Dateipfad' is the column for the file path
                     element.alt = medium.Titel || 'Kein Titel';  // Optional alt text
                     contentArea.appendChild(element);
                 })
@@ -138,27 +137,91 @@ function loadPhotos() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: name,
-            email: email,
-            lastname: lastname,
-            firstname: firstname
-        })
+        }
     })
         .then(response => response.json())
         .then(data => {
             const bildContainer = document.getElementById('contentArea');
             bildContainer.innerHTML = '';
-            data.forEach(bild => {
-                // Erstellen eines img-Elements für jedes Bild
+            const photos = data.data['Fotos'];
+
+            photos.forEach(bild => {
                 const img = document.createElement('img');
-                img.src = bild.Dateipfad; // Pfad zum Bild aus der Datenbank
-                img.alt = bild.Titel; // Optionaler Alternativtext
-                bildContainer.appendChild(img); // Hinzufügen des Bildes zum Container
+                img.src = bild.Dateipfad;
+                img.alt = bild.Titel;
+                bildContainer.appendChild(img);
             });
         })
         .catch(error => console.error('Fehler beim Laden der Bilder:', error));
+}
+
+function loadVideos() {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const contentContainer = document.getElementById('contentArea');
+            contentContainer.innerHTML = '';
+            const videos = data.data['Videos'];
+
+            videos.forEach(video => {
+                const vid = document.createElement('vid');
+                vid.src = video.Dateipfad;
+                vid.alt = video.Titel;
+                contentContainer.appendChild(vid);
+            });
+        })
+        .catch(error => console.error('Fehler beim Laden der Videos:', error));
+}
+
+function loadEbooks() {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const contentContainer = document.getElementById('contentArea');
+            contentContainer.innerHTML = '';
+            const ebooks = data.data['Ebooks'];
+
+            ebooks.forEach(ebook => {
+                const ebk = document.createElement('ebk');
+                ebk.src = ebook.Dateipfad;
+                ebk.alt = ebook.Titel;
+                contentContainer.appendChild(ebk);
+            });
+        })
+        .catch(error => console.error('Fehler beim Laden der E-Books:', error));
+}
+
+function loadAudioBooks() {
+    fetch('http://localhost/Mediendatenbank/public/MediumController/getAllMediums', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const contentContainer = document.getElementById('contentArea');
+            contentContainer.innerHTML = '';
+            const audiobooks = data.data['Hörbücher'];
+
+            audiobooks.forEach(audiobook => {
+                const abk = document.createElement('abk');
+                abk.src = audiobook.Dateipfad;
+                abk.alt = audiobook.Titel;
+                contentContainer.appendChild(abk);
+            });
+        })
+        .catch(error => console.error('Fehler beim Laden der Hörbücher:', error));
 }
 
 function loadKeyWords(keyWordElement, listType, deletionButton){
