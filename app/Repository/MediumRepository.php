@@ -45,8 +45,9 @@ class MediumRepository
         $stmt->close();
     }
 
-    public function deleteMedium(int $id, string $type) {}
-    public function readMedium(int $id, string $type) {}
+    public function deleteMedium(int $id, string $type) {
+        
+    }
     
     public function updateMedium(int $id, $fileType, $title, $resolution ='', $duration='', $speaker='', $author='', $pages='') {
         switch($fileType){
